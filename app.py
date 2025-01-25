@@ -1,10 +1,3 @@
-import streamlit as st
-
-# Set the page configuration
-st.set_page_config(page_title="Tong's Daily Dose", layout="centered")
-
-# Embed the HTML content
-html_code = """
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -103,6 +96,11 @@ html_code = """
         font-size: 0.9rem;
       }
     </style>
+    <script>
+      function showPage(page) {
+        alert("Page navigation for " + page + " is not implemented in this demo.");
+      }
+    </script>
   </head>
   <body>
     <header>
@@ -116,49 +114,14 @@ html_code = """
       <a href="#resources" onclick="showPage('resources')">Resources</a>
     </nav>
 
-    <div id="daily" class="content">
-      <h2>Daily Dose ☕</h2>
-      <p>Select a date to explore daily entries:</p>
-      <ul>
-        <li>
-          <a href="#daily-21012025" onclick="showPage('daily-21012025')">21.01.2025</a>
-        </li>
-      </ul>
-    </div>
-
-    <div id="daily-21012025" class="content" style="display: none">
-      <h2>Daily Dose ☕ - 21.01.2025</h2>
-      <p>
-        今天開始344天的15分鐘小記錄. 今天跟朋友coffee chat學到組織一個完整的report然後最喜歡朋友下的一句話
-        "讓他們瞧瞧你有多厲害" 最喜歡這種guts! 然後跟一位DS犯蠢發現自己的bug根本就差在一個S.
-        然後脫離git desktop :D! 開啟自己的專案:D 每天準時收看Tong的Daily Dose !
-      </p>
-    </div>
-
-    <div id="weekly" class="content" style="display: none">
-      <h2>Weekly Wrap-ups</h2>
-      <p>Summarize my week's progress and highlights.</p>
-    </div>
-
-    <div id="resources" class="content" style="display: none">
-      <h2>Resources</h2>
-      <p>List helpful articles, videos, or books here.</p>
+    <div class="content">
+      <h2>Welcome to Tong's Daily Dose!</h2>
+      <p>Here, you'll find insights, tips, and resources that I've curated along my learning journey. Feel free to explore and learn with me!</p>
     </div>
 
     <footer>
-      <p>&copy; 2025 Tong's Daily Dose. All rights reserved.</p>
+      <p>© 2025 Tong's Daily Dose. All rights reserved.</p>
     </footer>
-
-    <script>
-      function showPage(pageId) {
-        const pages = document.querySelectorAll(".content");
-        pages.forEach((page) => (page.style.display = "none"));
-        document.getElementById(pageId).style.display = "block";
-      }
-    </script>
   </body>
 </html>
-"""
 
-# Display the HTML code using Streamlit's components
-st.components.v1.html(html_code, height=800, scrolling=True)
