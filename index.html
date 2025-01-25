@@ -57,7 +57,8 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.2s ease, background-color 0.3s;
       }
-      nav a:hover {
+      nav a:hover,
+      nav a.active {
         background-color: var(--soft-orange);
         transform: scale(1.05);
       }
@@ -82,6 +83,12 @@
         line-height: 1.8;
         color: var(--dark-brown);
       }
+      .page {
+        display: none;
+      }
+      .page.active {
+        display: block;
+      }
       footer {
         text-align: center;
         background-color: var(--light-pink);
@@ -96,32 +103,89 @@
         font-size: 0.9rem;
       }
     </style>
-    <script>
-      function showPage(page) {
-        alert("Page navigation for " + page + " is not implemented in this demo.");
-      }
-    </script>
   </head>
   <body>
     <header>
       <h1>Tong's Daily Dose</h1>
       <p>Documenting my learning journey, one step at a time.</p>
     </header>
-
     <nav>
-      <a href="#daily" onclick="showPage('daily')">Daily Dose ☕</a>
-      <a href="#weekly" onclick="showPage('weekly')">Weekly Wrap-ups</a>
-      <a href="#resources" onclick="showPage('resources')">Resources</a>
+      <a href="#" data-page="home" class="active">Home</a>
+      <a href="#" data-page="daily">Daily Dose ☕</a>
+      <a href="#" data-page="weekly">Weekly Wrap-ups</a>
+      <a href="#" data-page="resources">Resources</a>
     </nav>
 
-    <div class="content">
+    <div id="home" class="content page active">
       <h2>Welcome to Tong's Daily Dose!</h2>
-      <p>Here, you'll find insights, tips, and resources that I've curated along my learning journey. Feel free to explore and learn with me!</p>
+      <p>
+        Here, you'll find insights, tips, and resources that I've curated along
+        my learning journey. Feel free to explore and learn with me!
+      </p>
+    </div>
+
+    <div id="daily" class="content page">
+      <h2>Daily Dose ☕</h2>
+      <p>
+        My daily learning updates. Each day brings new insights and challenges!
+      </p>
+      <h3>Today's Learning</h3>
+      <ul>
+        <li>Completed doing laundry</li>
+        <li>Practiced problem-solving algorithms</li>
+        <li>Read an article on web development trends</li>
+      </ul>
+    </div>
+
+    <div id="weekly" class="content page">
+      <h2>Weekly Wrap-ups</h2>
+      <p>A summary of my week's achievements, challenges, and key learnings.</p>
+      <h3>This Week's Highlights</h3>
+      <ul>
+        <li>Built a responsive web application</li>
+        <li>Learned advanced React concepts</li>
+        <li>Attended an online web development workshop</li>
+      </ul>
+    </div>
+
+    <div id="resources" class="content page">
+      <h2>Learning Resources</h2>
+      <p>
+        Curated list of resources that have been helpful in my learning journey.
+      </p>
+      <h3>Recommended Resources</h3>
+      <ul>
+        <li>MDN Web Docs</li>
+        <li>freeCodeCamp</li>
+        <li>Udemy Web Development Courses</li>
+        <li>YouTube Coding Channels</li>
+      </ul>
     </div>
 
     <footer>
       <p>© 2025 Tong's Daily Dose. All rights reserved.</p>
     </footer>
+
+    <script>
+      // Navigation functionality
+      document.querySelectorAll("nav a").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // Remove active class from all links and pages
+          document
+            .querySelectorAll("nav a")
+            .forEach((l) => l.classList.remove("active"));
+          document
+            .querySelectorAll(".page")
+            .forEach((page) => page.classList.remove("active"));
+
+          // Add active class to clicked link and corresponding page
+          this.classList.add("active");
+          const pageId = this.getAttribute("data-page");
+          document.getElementById(pageId).classList.add("active");
+        });
+      });
+    </script>
   </body>
 </html>
-
