@@ -1,0 +1,55 @@
+/* Daily Dose Subpage Styling */
+.daily-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.daily-item {
+  background-color: var(--light-pink);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.daily-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.daily-title {
+  color: var(--dark-brown);
+  font-size: 1.2rem;
+  font-family: "Georgia", serif;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.sub-list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.sub-list li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--dark-brown);
+}
+
+.code-block {
+  background-color: var(--dark-brown);
+  color: var(--light-beige);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+
+.code-block code {
+  display: block;
+  white-space: pre-wrap;
+}

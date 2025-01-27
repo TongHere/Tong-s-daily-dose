@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tong's Daily Dose</title>
+    <link rel="stylesheet" href="styles.css" />
     <style>
       :root {
         --light-pink: #f7ebe8;
@@ -153,25 +154,63 @@
     <div id="daily" class="content page">
       <h2>Daily Dose ☕</h2>
       <p>
-        My daily learning updates and reflections. Each day brings new insights
-        and challenges!
+        My daily learning updates. Each day brings new insights and challenges!
       </p>
       <!-- Sub-navigation for Daily Dose -->
       <div class="sub-nav">
-        <a href="#" data-subpage="daily-21">21.01</a>
-        <a href="#" data-subpage="daily-22">22.01</a>
-        <a href="#" data-subpage="daily-23">23.01</a>
+        <a href="#" data-subpage="daily-27">27.01</a>
+        <a href="#" data-subpage="daily-28">28.01</a>
+        <a href="#" data-subpage="daily-29">29.01</a>
       </div>
       <!-- Subpages for Daily Dose -->
-      <div id="daily-21" class="sub-page">
-        <h3>21.01 - Today's Learning</h3>
-        <ul>
-          <li>Completed a JavaScript tutorial</li>
-          <li>Practiced problem-solving algorithms</li>
-          <li>Read an article on web development trends</li>
+      <div id="daily-27" class="sub-page">
+        <h3>27.01 - What I Had Done Today</h3>
+        <ul class="daily-list">
+          <li class="daily-item">
+            <strong class="daily-title">Completed a DS tutorial and learned how to write a function using regex:</strong>
+            <pre class="code-block"><code class="language-python">
+      import re
+
+      # Define the regex pattern
+      pattern = r'"([^"]+)",\s*"([^"]+)"'
+
+      # Store data here
+      data = []
+
+      # Open file and extract the text inside the pattern
+      with open("file.txt") as file:
+        for line in file:
+          match = re.search(pattern, line)
+          if match:
+            question = match.group(1)
+            answer = match.group(2)
+            data.append((question, answer))
+
+      # Put into DataFrame
+      df = pd.DataFrame(data=data, columns=['question', 'answer'])
+            </code></pre>
+          </li>
+          <li class="daily-item">
+            <strong class="daily-title">Learned about a new model called DeepSeek:</strong>
+            <ul class="sub-list">
+              <li>Cheaper, less GPT consumption.</li>
+              <li>Reasoning ability as good as GPT-4.</li>
+              <li>I tried to run it with instructions, and found it does more than I tell it to do.</li>
+            </ul>
+          </li>
+          <li class="daily-item">
+            <strong class="daily-title">To-Do list for tomorrow:</strong>
+            <ul class="sub-list">
+              <li>Solve the bug.</li>
+              <li>Run experiments.</li>
+              <li>Finish the paper.</li>
+              <li>Plan for the week.</li>
+            </ul>
+          </li>
         </ul>
       </div>
-      <div id="daily-22" class="sub-page">
+      </div>
+      <div id="daily-28" class="sub-page">
         <h3>22.01 - Today's Learning</h3>
         <ul>
           <li>Worked on a React project</li>
@@ -179,7 +218,7 @@
           <li>Attended a coding meetup</li>
         </ul>
       </div>
-      <div id="daily-23" class="sub-page">
+      <div id="daily-29" class="sub-page">
         <h3>23.01 - Today's Learning</h3>
         <ul>
           <li>Explored CSS animations</li>
