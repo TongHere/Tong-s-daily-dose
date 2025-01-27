@@ -89,6 +89,32 @@
       .page.active {
         display: block;
       }
+      .sub-nav {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        justify-content: center;
+      }
+      .sub-nav a {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        background-color: var(--warm-orange);
+        border-radius: 15px;
+        color: var(--dark-brown);
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+      .sub-nav a:hover,
+      .sub-nav a.active {
+        background-color: var(--soft-orange);
+      }
+      .sub-page {
+        display: none;
+        margin-top: 1rem;
+      }
+      .sub-page.active {
+        display: block;
+      }
       footer {
         text-align: center;
         background-color: var(--light-pink);
@@ -112,8 +138,6 @@
     <nav>
       <a href="#" data-page="home" class="active">Home</a>
       <a href="#" data-page="daily">Daily Dose ☕</a>
-      <a href="#" data-page="daily-reflections">Daily Reflections</a>
-      <!-- New link -->
       <a href="#" data-page="weekly">Weekly Wrap-ups</a>
       <a href="#" data-page="resources">Resources</a>
     </nav>
@@ -132,26 +156,37 @@
         My daily learning updates and reflections. Each day brings new insights
         and challenges!
       </p>
-      <h3>Today's Learning</h3>
-      <ul>
-        <li>Completed a JavaScript tutorial</li>
-        <li>Practiced problem-solving algorithms</li>
-        <li>Read an article on web development trends</li>
-      </ul>
-    </div>
-
-    <div id="daily-reflections" class="content page">
-      <!-- New subpage -->
-      <h2>Daily Reflections</h2>
-      <p>
-        Here, I reflect on my daily learning experiences and share my thoughts.
-      </p>
-      <h3>Today's Reflection</h3>
-      <ul>
-        <li>Felt confident after completing the JavaScript tutorial</li>
-        <li>Struggled with a complex algorithm but learned a lot</li>
-        <li>Excited to apply new web development trends in my projects</li>
-      </ul>
+      <!-- Sub-navigation for Daily Dose -->
+      <div class="sub-nav">
+        <a href="#" data-subpage="daily-21">21.01</a>
+        <a href="#" data-subpage="daily-22">22.01</a>
+        <a href="#" data-subpage="daily-23">23.01</a>
+      </div>
+      <!-- Subpages for Daily Dose -->
+      <div id="daily-21" class="sub-page">
+        <h3>21.01 - Today's Learning</h3>
+        <ul>
+          <li>Completed a JavaScript tutorial</li>
+          <li>Practiced problem-solving algorithms</li>
+          <li>Read an article on web development trends</li>
+        </ul>
+      </div>
+      <div id="daily-22" class="sub-page">
+        <h3>22.01 - Today's Learning</h3>
+        <ul>
+          <li>Worked on a React project</li>
+          <li>Learned about state management</li>
+          <li>Attended a coding meetup</li>
+        </ul>
+      </div>
+      <div id="daily-23" class="sub-page">
+        <h3>23.01 - Today's Learning</h3>
+        <ul>
+          <li>Explored CSS animations</li>
+          <li>Started a new portfolio project</li>
+          <li>Reviewed JavaScript fundamentals</li>
+        </ul>
+      </div>
     </div>
 
     <div id="weekly" class="content page">
@@ -202,6 +237,31 @@
           const pageId = this.getAttribute("data-page");
           document.getElementById(pageId).classList.add("active");
         });
+      });
+
+      // Sub-navigation functionality for Daily Dose
+      document.querySelectorAll(".sub-nav a").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // Remove active class from all sub-links and sub-pages
+          document
+            .querySelectorAll(".sub-nav a")
+            .forEach((l) => l.classList.remove("active"));
+          document
+            .querySelectorAll(".sub-page")
+            .forEach((page) => page.classList.remove("active"));
+
+          // Add active class to clicked sub-link and show corresponding sub-page
+          this.classList.add("active");
+          const subPageId = this.getAttribute("data-subpage");
+          document.getElementById(subPageId).classList.add("active");
+        });
+      });
+
+      // Hide all sub-pages by default
+      document.querySelectorAll(".sub-page").forEach((page) => {
+        page.classList.remove("active");
       });
     </script>
   </body>
