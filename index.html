@@ -167,7 +167,10 @@
         <h3>27.01 - What I Had Done Today</h3>
         <ul class="daily-list">
           <li class="daily-item">
-            <strong class="daily-title">Completed a DS tutorial and learned how to write a function using regex:</strong>
+            <strong class="daily-title"
+              >Completed a DS tutorial and learned how to write a function using
+              regex:</strong
+            >
             <pre class="code-block"><code class="language-python">
       import re
 
@@ -191,11 +194,16 @@
             </code></pre>
           </li>
           <li class="daily-item">
-            <strong class="daily-title">Learned about a new model called DeepSeek:</strong>
+            <strong class="daily-title"
+              >Learned about a new model called DeepSeek:</strong
+            >
             <ul class="sub-list">
               <li>Cheaper, less GPT consumption.</li>
               <li>Reasoning ability as good as GPT-4.</li>
-              <li>I tried to run it with instructions, and found it does more than I tell it to do.</li>
+              <li>
+                I tried to run it with instructions, and found it does more than
+                I tell it to do.
+              </li>
             </ul>
           </li>
           <li class="daily-item">
@@ -209,22 +217,20 @@
           </li>
         </ul>
       </div>
-      </div>
       <div id="daily-28" class="sub-page">
         <h3>31.01 -never know how to properly create an evironment</h3>
         <ul>
           <li>Dont know how to create an envrionment,aslo crash.</li>
           <li>0 progress but need to have update meeting tmr</li>
-          <li> Sleeo first and try again tmr, need to write down how to create an developing environment </li>
+          <li>
+            Sleeo first and try again tmr, need to write down how to create an
+            developing environment
+          </li>
         </ul>
       </div>
       <div id="daily-29" class="sub-page">
         <h3>23.01 - Today's Learning</h3>
-        <ul>
-          <li>Explored CSS animations</li>
-          <li>Started a new portfolio project</li>
-          <li>Reviewed JavaScript fundamentals</li>
-        </ul>
+        <div id="markdown-content"></div>
       </div>
     </div>
 
@@ -257,6 +263,7 @@
       <p>© 2025 Tong's Daily Dose. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
       // Navigation functionality
       document.querySelectorAll("nav a").forEach((link) => {
@@ -295,6 +302,11 @@
           this.classList.add("active");
           const subPageId = this.getAttribute("data-subpage");
           document.getElementById(subPageId).classList.add("active");
+
+          // Load markdown content if the sub-page is 29.01
+          if (subPageId === "daily-29") {
+            loadMarkdownContent();
+          }
         });
       });
 
@@ -302,6 +314,20 @@
       document.querySelectorAll(".sub-page").forEach((page) => {
         page.classList.remove("active");
       });
+
+      // Function to load markdown content
+      function loadMarkdownContent() {
+        fetch("notes.md")
+          .then((response) => response.text())
+          .then((data) => {
+            // Parse markdown and insert into the div
+            document.getElementById("markdown-content").innerHTML =
+              marked.parse(data);
+          })
+          .catch((error) =>
+            console.error("Error loading markdown file:", error)
+          );
+      }
     </script>
   </body>
 </html>
