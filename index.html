@@ -154,30 +154,33 @@
       </p>
     </div>
 
-    <!-- DAILY PAGE -->
     <div id="daily" class="content page">
       <h2>Daily Updates</h2>
       <p>Pick a day below to see its content (loaded from Markdown).</p>
+
       <!-- Sub-navigation for Daily -->
       <div class="sub-nav">
+        <!-- "deepseek" means we want to load deepseek.md -->
         <a href="#" data-subpage="deepseek" class="active">Day 1</a>
         <a href="#" data-subpage="daily-day2">Day 2</a>
         <a href="#" data-subpage="daily-day3">Day 3</a>
       </div>
+
       <!-- Subpages for Daily -->
-      <div id="daily-day1" class="sub-page active">
+      <!-- 1) Use id="deepseek" to match data-subpage="deepseek" -->
+      <div id="deepseek" class="sub-page active">
         <h3>Daily - Day 1</h3>
-        <!-- Content loaded from daily-day1.md will go here -->
-        <div id="markdown-daily-day1"></div>
+        <!-- 2) This div is where "deepseek.md" will be inserted -->
+        <div id="markdown-deepseek"></div>
       </div>
+
       <div id="daily-day2" class="sub-page">
         <h3>Daily - Day 2</h3>
-        <!-- Content loaded from daily-day2.md will go here -->
         <div id="markdown-daily-day2"></div>
       </div>
+
       <div id="daily-day3" class="sub-page">
         <h3>Daily - Day 3</h3>
-        <!-- Content loaded from daily-day3.md will go here -->
         <div id="markdown-daily-day3"></div>
       </div>
     </div>
