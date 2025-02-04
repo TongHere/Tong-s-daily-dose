@@ -1,165 +1,110 @@
-# Notes for DeepSeek Paper
+This is note for deepseek paper.
+DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning
 
-**Title:** _DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning_
+1. DeepSeek-R1-Zero and DeepSeek-R1. DeepSeek-R1-Zero
 
----
+Model train without supervised fine tunning but with reinforment learning.
 
-## 1. Overview
+- With previous approaches, it has challenges like poor readability, and languages mixing.
 
-### 1.1. DeepSeek-R1-Zero and DeepSeek-R1
+- Use the approach like multi-stage training and cold start data before RL.
 
-- **DeepSeek-R1-Zero**: A model trained **without** supervised fine-tuning, but **with** reinforcement learning (RL).
-- **DeepSeek-R1**: A variant distilled from Qwen and Llama, incorporating supervised fine-tuning (SFT) data **before** RL.
+- Achieves performance comparable to OpenAI-o1-1217 on reasoning task.
 
-**Key Points:**
+- DeepSeek R1 is distilled from Qwen and Llama
 
-- Previous approaches suffered from:
-  - Poor readability
-  - Mixing languages
-- The DeepSeek approach uses multi-stage training and “cold-start” data **before** RL.
-- Performance is comparable to _OpenAI-o1-1217_ on reasoning tasks.
-- Post-training (RL) is crucial for improved accuracy on reasoning tasks, alignment with social values, and adaptation to user preferences—requiring fewer computation resources compared to full retraining.
-- Effective test-time scaling remains an open question for the research community.
+- post-training (like reinforment learning) has emerged as an important component of the full training pipeline. This will increase the acurracy on reasoing task, align with social value and adapts to user perferences.and require less computation resource.
 
-### 1.2. Major Components
+- effective test-time scaling remains an open-question for the research community.
 
-1. **Process-based Reward Model**
-2. **Reinforcement Learning**
-3. **Search Algorithms**
+1.  Process-based reward model
+2.  Reinforment learning
+3.  Search algorithms
 
----
+- Goal of paper
 
-## 2. Goal of the Paper
+1.  Explore LLM to develop reasoning capabilities without any supervised data. Focusing on self-evolution throught a pure RL process.
+2.  DeepSeek V3 Base as the base model, and employ GRPO as RL framework to improve modle performance in reasoing.
 
-1. To explore how large language models (LLMs) can develop **reasoning capabilities** without any supervised data, focusing on a purely RL-driven, self-evolution process.
-2. To use **DeepSeek V3 Base** as the starting model and employ **GRPO** (Group Relative Policy Optimization) as the RL framework, thereby improving performance on reasoning tasks.
+DeepSeek R1 Zero
 
----
+- DeepSeekR1 : incorporates a small amount of cold-start data (SFT data) to fine-tune the DeepSeek V3-Base model.
+- Follow that, perform the reasoning oriented RL like DeepSeek-R1-Zero
+- Upon nearing converagce in RL process, we create new SFT(supervise fine tune) data through rejection sampling on the RL checkpoint, combined with supervised data from deepseek-V3 in domain such as writing, QA.
+- Then re-trained the DeepSeek-V3-Base Model
+- After fine-tunning with the new data, the checkpoint undergoes an additional RL process, taking into account prompts from all scenarios.
+- distilled Qwne and Llama
 
-## 3. DeepSeek-R1 Zero
+  1.1 Contributions
 
-- **DeepSeek-R1 Zero** applies RL **directly** to the DeepSeek V3-Base model, initially without supervised fine-tuning (SFT).
-- After RL converges, new SFT data is created (via rejection sampling on the RL checkpoint) and combined with supervised data from DeepSeek-V3 in domains such as writing and QA.
-- The DeepSeek V3-Base Model is then re-trained (fine-tuned) on this expanded dataset, followed by **another** RL step that includes prompts from all scenarios.
-- The final result is **DeepSeek-R1**, distilled from Qwen and Llama.
+- Post Training : Directly using RL to the base model without SFT.
+- Approach allow model to explore chain of thought for solving complex problem.
+- Deepseek R1 Zero demonstrates capabilities as Self-Verification, reflection and generating CoTs,marketing a significant milestone for the research commnuity.
+- Two RL stages - aiming at discovering improved reasoning patterns and aligining with humman preferance.
+- Two SFT stages that serves as the seed for models reasoning and non reasoning capabilities.
 
-### 3.1. Contributions
+  1.2 Distillation
 
-- **Post-Training with RL**: Directly applying RL to a base model without initial SFT.
-- **Enhanced Chain of Thought**: Encourages exploration and production of detailed reasoning steps.
-- **Self-Verification & Reflection**: DeepSeek-R1 Zero demonstrates self-verification, reflection, and generating advanced CoTs—an important milestone for the research community.
-- **Two RL Stages**:
-  1. Discover improved reasoning patterns.
-  2. Align with human preferences.
-- **Two SFT Stages**: Provide seeds for both reasoning and non-reasoning capabilities.
+- Smaller model distalled from large model perform good.
+- Fine-tuned densed model outperform benchmark.
 
-### 3.2. Distillation
+Evaluation Result
 
-- Smaller, distilled models (from larger Qwen or Llama) perform surprisingly well.
-- Fine-tuned dense models outperform certain benchmarks.
+- Reasoning task: a. DeepSeek-R1 achieves 79.8, slightly surpassing OpenAI-o1-1217. DeepSeek R1 perform better that DeepSeekV3
+- Knowledge : DeepSeek R1 outperform other close source model
 
----
+Approach :
 
-## 4. Evaluation Results
+1. Large Scale reinforment learning.
+2. DeepSeek R1 Zero - Applied RL directly to the base model without any SFT data.
+3. DeepSeek R1, whichi applied RL starting from a checkpoint fine-tuned with thousands of long Chain of thought Examples.
+4. Distill the reasoning capability from DeepSeek-R1 small dense models.
 
-| Aspect             | Performance                                                                                 |
-| ------------------ | ------------------------------------------------------------------------------------------- |
-| **Reasoning Task** | DeepSeek-R1 achieves **79.8**, slightly surpassing OpenAI-o1-1217. Better than DeepSeek V3. |
-| **Knowledge**      | DeepSeek-R1 outperforms other closed-source models in various knowledge tests.              |
+2.2 DeepSeek-R1-Zero: Reinforcement Learning on the Base Model
 
----
+1. Not use a lot SFT data, but gathering data from RL.
+2. explore the potential of LLMs to develop reasoning capabilities without any supervised data,focusing on their self-evolution through a pure reinforcement learning process.
+3. Reinforment Learning Algorithm:
 
-## 5. Approach Summary
+- Group Relative Policy Optimization
+- Prompt they use :
+  """
+  A conversation between User and Assistant. The user asks a question, and the Assistant solves it.
+  The assistant first thinks about the reasoning process in the mind and then provides the user
+  with the answer. The reasoning process and answer are enclosed within <think> </think> and
+  <answer> </answer> tags, respectively, i.e., <think> reasoning process here </think>
+  <answer> answer here </answer>. User: prompt. Assistant
 
-1. **Large-Scale Reinforcement Learning**: Applied directly on top of a base LLM.
-2. **DeepSeek-R1 Zero**: Base model + RL **without** any SFT data.
-3. **DeepSeek-R1**: RL starting from a checkpoint already fine-tuned with thousands of long chain-of-thought examples.
-4. **Distillation**: Reasoning ability is further distilled into smaller dense models from the main RL-trained checkpoint.
+""" 4. Reward Model:
 
-### 5.1. DeepSeek-R1-Zero: RL on the Base Model
+- Accuracy Reward
+- Format Rewards
 
-- Minimizes reliance on SFT data by gathering data **from** RL.
-- Emphasizes the potential of LLMs to develop reasoning abilities autonomously via self-evolution.
+5. Training Template:
 
-#### 5.1.1. Reinforcement Learning Algorithm
+- Template for guiding the base model to adhere to our specified instruction.
+- An interesting “aha moment” of an intermediate version of DeepSeek-R1-Zero
+  2.3.1
+- DeepSeek-R1 we construct and collect a small amount of long CoT data
+  to fine-tune the model as the initial RL actor. 1. few-shot prompting with a long CoT. 2. directly prompting
+  models to generate detailed answers with reflection and verification, gathering DeepSeek-R1-
+  Zero outputs in a readable format. 3. refining the results through post-processing by human
+  annotators.
+-
 
-- **Group Relative Policy Optimization (GRPO)**
+News -
 
-#### 5.1.2. Prompting Format
-
-A conversation between User and Assistant. The user asks a question, and the Assistant solves it.
-The assistant first thinks about the reasoning process in its mind and then provides the user
-with the answer. The reasoning process and answer are enclosed within <think> </think> and
-<answer> </answer> tags, respectively.
-
-User: [prompt here]
-Assistant:
-<think> [reasoning process here] </think>
-<answer> [answer here] </answer>
-
-#### 5.1.3. Reward Model
-
-- **Accuracy Reward**
-- **Formatting Rewards** (adhering to `<think>` & `<answer>` tags)
-
-#### 5.1.4. Training Template
-
-- Guides the base model to follow specified instructions.
-- _“Aha moment”_: An intermediate version of DeepSeek-R1-Zero learned to generate more structured outputs with reflection and verification.
-
-### 5.2. DeepSeek-R1
-
-- Begins with a **small** SFT dataset (long chain-of-thought examples).
-- Uses few-shot prompting, self-generated CoT outputs (from DeepSeek-R1-Zero), and human annotation.
-- Retrains the base model, and finishes with an **additional** RL process considering all prompt scenarios.
-
----
-
-## 6. News & Miscellaneous
-
-### 6.1. Founder
-
-- **Name**: Wun Fung-Laing
-- **Background**: Graduated from Zhejiang University (Electrical Engineering) and holds a master’s in Communication Engineering.
-- **Affiliation**: High Flyer (Hangzhou-based hedge fund and AI company founded in 2015).
-
-### 6.2. GPU Fight
-
-- Aim: Not to reduce chips but to make them more efficient.
-- American ban on advanced chips to China; rumor of ~50k GPUs in use.
-- **Jevons Paradox**: Increasing efficiency often leads to higher overall consumption.
-
-### 6.3. Privacy
-
-- **Information Collected**:
-  - Device model, OS, keystroke patterns, IP address, system language
-  - Data from login, sign-up, or linked services
-  - Shared with service providers, business partners, corporate groups, and for legal obligations
-- **User Rights**:
-  - Know how personal data is collected and used
-  - Access, change, oppose, or withdraw consent
-  - Request a copy or deletion of data
-- **Data Storage**:
-  - Collected and stored in China
-  - Retention depends on data type
-
-### 6.4. Political Speech
-
-- Filtered by default.
-- One-China Policy is the default stance.
-
-### 6.5. Cost
-
-- Estimated at **\$6M** (excludes smaller runs, data generation, and DeepSeek R1 training transactions).
-
-### 6.6. Memory
-
-- **16 × 80 GB** GPU memory in use.
-
-### 6.7. “Unsensor” Version
-
-- An uncensored variant might exist in Perplexity (unverified rumor).
-
----
-
-_End of DeepSeek Paper Notes_
+1. Founder : Wun Fung- Laing, Grauduated from 浙江大學電機工程系畢業生、通信工程碩士. Funding High Flyer (Hangzhou-based hedge fund and artificial intelligence (AI) company founded in 2015)
+1. GPU fight - Not reduce the chips, but make chips more efficient. Amarican ban advance chips to china. Rummor : 50k GPU. Jevons Paradox - increase the efficient, but will increase the consumption, the resource is more attractive, and more people use it,
+1. Privacy -
+   Information provide. User Input, Information when contact them.
+   This information includes your device model, operating system, keystroke patterns or rhythms, IP address, and system languagues.
+   Log in, Sign up or Linked Services. Advertising, Measurement, and other Partners.
+   Share information to Service provider, Business Partner, Corporate group and Legal Obligation and Rights
+   Your Right: Right to know how they collect, use personal information, right to access, withdraw consent, change, oppose, request a copy of your authorization.
+   Depends on what kind of data to keep your data.
+   Data is colleted and storage in China
+1. Politcal Speech - Filier and One China Policy default.
+1. Cost : 6m dollor. but exclude ablations, smaller run, data generation and deepseek R1 training. Transaction information.
+1. 16x 80 GB Memory
+1. Unsensor version in Preplexity
