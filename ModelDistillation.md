@@ -2,7 +2,7 @@
 
 Model Distillation means knowledge transfer from a large model (Teacher model) to a smaller model (Student model) using different distillation methods.
 
-![image.png](C:\Users\User\Documents\Tong's\1image.png)
+![image.png](1image.png)
 
 **_Figure 1. The teacher-student framework for knowledge distillation | Source: [Arxiv](https://arxiv.org/abs/2006.05525)_**
 
@@ -19,7 +19,7 @@ Model Distillation means knowledge transfer from a large model (Teacher model) t
 - **Second**: Compute the loss between them (the difference between them).
 - **Third**: Return a weighted average between KL Loss and the cross-entropy loss.
 
-![image.png](C:\Users\User\Documents\Tong's\2image.png)
+![image.png](2image.png)
 
 **_Figure 2. Logits distillation | Source:_** [Deep Dive: Model Distillation with DistillKit](https://www.slideshare.net/slideshow/deep-dive-model-distillation-with-distillkit/274619548)
 
@@ -32,7 +32,7 @@ Model Distillation means knowledge transfer from a large model (Teacher model) t
 - **Second**: Compute the loss per layer per batch between the teacher model and the student model.
 - **Third**: Return a weighted average between KL Loss and the cross-entropy loss.
 
-![image.png](C:\Users\User\Documents\Tong's\3image.png)
+![image.png](3image.png)
 
 ## Which Examples of Model Distillation?
 
