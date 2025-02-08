@@ -2,7 +2,7 @@
 
 Model Distillation means knowledge transfer from a large model (Teacher model) to a smaller model (Student model) using different distillation methods.
 
-![image.png](1image.png)
+![image.png](1image.png?raw=true)
 
 **_Figure 1. The teacher-student framework for knowledge distillation | Source: [Arxiv](https://arxiv.org/abs/2006.05525)_**
 
