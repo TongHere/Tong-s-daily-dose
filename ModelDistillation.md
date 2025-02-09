@@ -1,4 +1,4 @@
-# What is Model Distillation?
+### What is Model Distillation?
 
 Model Distillation means knowledge transfer from a large model (Teacher model) to a smaller model (Student model) using different distillation methods.
 
@@ -6,7 +6,7 @@ Model Distillation means knowledge transfer from a large model (Teacher model) t
 
 **_Figure 1. The teacher-student framework for knowledge distillation | Source: [Arxiv](https://arxiv.org/abs/2006.05525)_**
 
-## What is the Impact of Model Distillation?
+### What is the Impact of Model Distillation?
 
 1. Using a smaller model while maintaining the same accuracy.
 2. Reducing compute resources and improving the accessibility of AI applications.
@@ -34,18 +34,18 @@ Model Distillation means knowledge transfer from a large model (Teacher model) t
 
 <img src="img/3image.png" alt="Hidden-State-Distillation"/>
 
-## Which Examples of Model Distillation?
+### Which Examples of Model Distillation?
 
 1. BERT to DistilBERT.
 2. Llama-3.1 405B instruct to Llama-3.1 70B instruct.
 3. Qwen 2.5 32B and Llama-70B to DeepSeek-R1.
 
-## What’s Next for Model Distillation?
+### What’s Next for Model Distillation?
 
 1. Energy-efficient AI.
 2. On-device AI (Apple Intelligence AFM - Apple Foundation Model).
 
-## References
+### References
 
 - [https://arxiv.org/abs/1503.02531](https://arxiv.org/abs/1503.02531)
 - [https://www.youtube.com/watch?v=JE7SuP049mQ](https://www.youtube.com/watch?v=JE7SuP049mQ)
