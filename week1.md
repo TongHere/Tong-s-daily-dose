@@ -32,7 +32,7 @@
 1. 它並沒有真正幫助我理解論文，而是為我生成了一些要點，導致我無法掌握完整的上下文。如果能更好地利用互動式 podcast 模式，或許會有很大幫助。
 2. 理解一個概念需要因人而異的資源。作為專案經理，我更關注概念、影響、應用、工作流程和結果；但對資料科學家或機器學習工程師而言，關注點可能完全不同。因此，作為使用者，我們首先要明確自己的需求，才能更有效率地使用這些工具。
 
-### This week
+### 03.02-09.02 weekly Note
 
 #### AI strategy: the Mckensey & Company 2025 AI Report.
 
@@ -50,7 +50,7 @@ The other interesting finding of AI report is in sales&marketing departments, em
 
 I had run the experiments of LLM and found out SLM for domain specific works, works pretty well, sounds obviously lol.
 
-#### Humanity
+####Humanity
 
 This week, there is a very famous taiwan celebrities she died. I watched her shows since I was pretty young. She went to travel in Japan, got flu and passed away within 3-5days.
 Who knows what will happen in the next days of your life, right?
