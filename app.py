@@ -5,6 +5,7 @@ import logging
 import re
 from google.cloud import monitoring_v3
 from google.cloud import logging as cloud_logging
+from datetime import datetime
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -22,6 +23,7 @@ app = Flask(__name__)
 
 # Get version from environment variable or use default
 VERSION = os.environ.get('VERSION', '1.0.0')
+BUILD_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def fix_image_paths(content):
     """Fix image paths in markdown content to work with Flask's static files."""
@@ -62,17 +64,17 @@ def home():
     logger.info(f"Accessing home page with version: {VERSION}")
     content = load_markdown('static/content/deepseek.md')
     logger.info(f"Content loaded, rendering template with version: {VERSION}")
-    return render_template('index.html', content=content, version=VERSION)
+    return render_template('index.html', content=content, version=VERSION, build_time=BUILD_TIME)
 
 @app.route('/daily')
 def daily():
     logger.info("Accessing daily content")
-    return render_template('index.html', content=load_markdown('deepseek.md'), version=VERSION)
+    return render_template('index.html', content=load_markdown('deepseek.md'), version=VERSION, build_time=BUILD_TIME)
 
 @app.route('/weekly')
 def weekly():
     logger.info("Accessing weekly content")
-    return render_template('index.html', content=load_markdown('deepseek.md'), version=VERSION)
+    return render_template('index.html', content=load_markdown('deepseek.md'), version=VERSION, build_time=BUILD_TIME)
 
 @app.errorhandler(404)
 def page_not_found(e):
