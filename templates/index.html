@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta name="wb:op" content="2e6acf515948f64133fa42ecb174621c" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tong's Daily Dose</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+      :root {
+        --light-pink: #f7ebe8;
+        --dark-brown: #5c4033;
+        --light-beige: #efeae4;
+        --soft-orange: #f8d9c4;
+        --warm-orange: #edbfa6;
+      }
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--light-beige);
+        color: var(--dark-brown);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      header {
+        background-color: var(--light-pink);
+        padding: 2rem;
+        text-align: center;
+        border-bottom: 2px solid var(--dark-brown);
+        width: 100%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        color: var(--dark-brown);
+      }
+      header h1 {
+        font-size: 2.5rem;
+        font-family: "Georgia", serif;
+        margin: 0;
+      }
+      header p {
+        font-size: 1.2rem;
+        color: var(--dark-brown);
+      }
+      nav {
+        margin: 2rem 0;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav a {
+        font-size: 1rem;
+        color: white;
+        text-decoration: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 20px;
+        background-color: var(--dark-brown);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease, background-color 0.3s;
+      }
+      nav a:hover,
+      nav a.active {
+        background-color: var(--soft-orange);
+        transform: scale(1.05);
+      }
+      .content {
+        margin: 2rem;
+        padding: 1.5rem;
+        background: var(--light-pink);
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 800px;
+        color: var(--dark-brown);
+      }
+      .content h2 {
+        font-family: "Georgia", serif;
+        color: var(--dark-brown);
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      .content p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--dark-brown);
+      }
+      .page {
+        display: none;
+      }
+      .page.active {
+        display: block;
+      }
+      /* Sub-navigation styles */
+      .sub-nav {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        justify-content: center;
+      }
+      .sub-nav a {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        background-color: var(--warm-orange);
+        border-radius: 15px;
+        color: var(--dark-brown);
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+      .sub-nav a:hover,
+      .sub-nav a.active {
+        background-color: var(--soft-orange);
+      }
+      .sub-page {
+        display: none;
+        margin-top: 1rem;
+      }
+      .sub-page.active {
+        display: block;
+      }
+      footer {
+        text-align: center;
+        background-color: var(--light-pink);
+        color: var(--dark-brown);
+        padding: 1.5rem 0;
+        margin-top: auto;
+        width: 100%;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+      }
+      footer p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Tong's Daily Dose</h1>
+      <p>Documenting my learning journey, one step at a time.</p>
+    </header>
+
+    <nav>
+      <a href="{{ url_for('home') }}" {% if section == 'home' %}class="active"{% endif %}>Home</a>
+      <a href="{{ url_for('daily', content='deepseek') }}" {% if section == 'daily' %}class="active"{% endif %}>Daily</a>
+      <a href="{{ url_for('weekly', content='week1') }}" {% if section == 'weekly' %}class="active"{% endif %}>Weekly</a>
+      <a href="#" {% if section == 'resource' %}class="active"{% endif %}>Resource</a>
+    </nav>
+
+    <div class="content">
+      {% if section == 'home' %}
+        <h2>Welcome to Tong's Daily Dose!</h2>
+        <p>Here, you'll find insights, tips, and resources that I've curated along my learning journey. Feel free to explore and learn with me!</p>
+      {% elif section == 'daily' %}
+        <h2>Daily Updates</h2>
+        <div class="sub-nav">
+          <a href="{{ url_for('daily', content='deepseek') }}" {% if subpage == 'deepseek' %}class="active"{% endif %}>DeepSeek</a>
+          <a href="{{ url_for('daily', content='ModelDistillation') }}" {% if subpage == 'ModelDistillation' %}class="active"{% endif %}>Model Distillation</a>
+        </div>
+        {% if content %}
+          <div class="markdown-content">
+            {{ content|safe }}
+          </div>
+        {% endif %}
+      {% elif section == 'weekly' %}
+        <h2>Weekly Wrap-ups</h2>
+        <div class="sub-nav">
+          <a href="{{ url_for('weekly', content='week1') }}" {% if subpage == 'week1' %}class="active"{% endif %}>Week 1</a>
+        </div>
+        {% if content %}
+          <div class="markdown-content">
+            {{ content|safe }}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Tong's Daily Dose. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
