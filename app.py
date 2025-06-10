@@ -21,8 +21,8 @@ project_name = f"projects/tongsdailydose-462517"
 
 app = Flask(__name__)
 
-# Get version from environment variable or use default
-VERSION = os.environ.get('VERSION', '1.0.0')
+# Version information
+VERSION = "1.0.1"
 BUILD_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def fix_image_paths(content):
