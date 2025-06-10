@@ -59,8 +59,10 @@ def load_markdown(filename):
 
 @app.route('/')
 def home():
-    logger.info("Accessing home page")
-    return render_template('index.html', content=load_markdown('deepseek.md'), version=VERSION)
+    logger.info(f"Accessing home page with version: {VERSION}")
+    content = load_markdown('static/content/deepseek.md')
+    logger.info(f"Content loaded, rendering template with version: {VERSION}")
+    return render_template('index.html', content=content, version=VERSION)
 
 @app.route('/daily')
 def daily():
