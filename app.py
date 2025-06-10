@@ -106,6 +106,7 @@ def weekly(content):
 def chat():
     try:
         data = request.get_json()
+        logger.info(f"Received chat POST: {data}")
         if not data:
             logger.error("No JSON data received")
             return jsonify({'error': 'No data provided'}), 400
@@ -132,18 +133,19 @@ def chat():
                 temperature=0.7,
                 timeout=10
             )
-            assistant_message = response.choices[0].message.content
-            logger.info(f"Successfully generated response: {assistant_message[:50]}...")
-            return jsonify({'response': assistant_message})
-        except openai.APITimeoutError:
-            logger.error("OpenAI API request timed out")
-            return jsonify({'error': 'Request timed out. Please try again.'}), 504
-        except openai.APIError as e:
+            assistant_message = response.choices[0].message.content if response.choices else None
+            logger.info(f"OpenAI response: {assistant_message}")
+            if assistant_message:
+                return jsonify({'response': assistant_message})
+            else:
+                logger.error("No response from OpenAI API")
+                return jsonify({'error': 'No response from OpenAI API'}), 502
+        except Exception as e:
             logger.error(f"OpenAI API error: {str(e)}")
-            return jsonify({'error': 'Error communicating with OpenAI. Please try again.'}), 502
+            return jsonify({'error': f'OpenAI API error: {str(e)}'}), 502
     except Exception as e:
         logger.error(f"Unexpected error in chat endpoint: {str(e)}")
-        return jsonify({'error': 'An unexpected error occurred'}), 500
+        return jsonify({'error': f'Unexpected error: {str(e)}'}), 500
 
 @app.errorhandler(404)
 def page_not_found(e):

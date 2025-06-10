@@ -235,7 +235,7 @@
           <div class="chat-box" id="chatBox">
             <div class="chat-messages" id="chatMessages">
               <div class="message system">
-                Hello! I'm your AI assistant. How can I help you today?
+                Hello! This is Tong, Let's chat!
               </div>
             </div>
             <div class="chat-input">
@@ -248,7 +248,7 @@
         <script>
           // Store conversation in memory
           let conversation = [
-            {role: 'system', content: "Hello! I'm your AI assistant. How can I help you today?"}
+            {role: 'system', content: "Hello! This is Tong, Let's chat!"}
           ];
 
           function addMessage(message, type) {
@@ -288,6 +288,7 @@
                 })
               });
               const data = await response.json();
+              console.log('Chat API response:', data); // Debug log
               if (data.response) {
                 conversation.push({role: 'assistant', content: data.response});
                 renderConversation();
@@ -296,6 +297,7 @@
                 renderConversation();
               }
             } catch (error) {
+              console.error('Chat API error:', error); // Debug log
               conversation.push({role: 'system', content: 'Sorry, there was an error processing your message.'});
               renderConversation();
             }
