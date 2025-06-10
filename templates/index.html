@@ -159,6 +159,9 @@
         {% if content %}
           <div class="markdown-content">
             {{ content|safe }}
+            <div class="version-info">
+                <small>Version: {{ version }}</small>
+            </div>
           </div>
         {% endif %}
       {% elif section == 'weekly' %}

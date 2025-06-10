@@ -20,6 +20,9 @@ project_name = f"projects/tongsdailydose-462517"
 
 app = Flask(__name__)
 
+# Get version from environment variable or use default
+VERSION = os.environ.get('VERSION', '1.0.0')
+
 def fix_image_paths(content):
     """Fix image paths in markdown content to work with Flask's static files."""
     # Replace relative image paths with Flask's url_for
@@ -57,17 +60,17 @@ def load_markdown(filename):
 @app.route('/')
 def home():
     logger.info("Accessing home page")
-    return render_template('index.html', content=load_markdown('deepseek.md'))
+    return render_template('index.html', content=load_markdown('deepseek.md'), version=VERSION)
 
 @app.route('/daily')
 def daily():
     logger.info("Accessing daily content")
-    return render_template('index.html', content=load_markdown('deepseek.md'))
+    return render_template('index.html', content=load_markdown('deepseek.md'), version=VERSION)
 
 @app.route('/weekly')
 def weekly():
     logger.info("Accessing weekly content")
-    return render_template('index.html', content=load_markdown('deepseek.md'))
+    return render_template('index.html', content=load_markdown('deepseek.md'), version=VERSION)
 
 @app.errorhandler(404)
 def page_not_found(e):

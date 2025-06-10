@@ -271,3 +271,12 @@ footer p {
     margin: 0;
     font-size: 0.9rem;
 }
+
+.version-info {
+    margin-top: 2rem;
+    padding: 0.5rem;
+    text-align: right;
+    color: #666;
+    font-size: 0.8rem;
+    border-top: 1px solid #eee;
+}
