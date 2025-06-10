@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, abort, request, url_for
+from flask import Flask, render_template, send_from_directory, abort, request, url_for, jsonify
 import markdown
 import os
 import logging
@@ -6,6 +6,7 @@ import re
 from google.cloud import monitoring_v3
 from google.cloud import logging as cloud_logging
 from datetime import datetime
+import openai
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -19,12 +20,17 @@ cloud_logging_client.setup_logging()
 monitoring_client = monitoring_v3.MetricServiceClient()
 project_name = f"projects/tongsdailydose-462517"
 
+# Initialize OpenAI client
+openai.api_key = os.getenv('OPENAI_API_KEY')
+if not openai.api_key:
+    logger.warning("OPENAI_API_KEY environment variable not set")
+
 app = Flask(__name__)
 
 # Version information
-VERSION = "1.0.5"
+VERSION = "1.0.6"
 BUILD_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-TEST_MESSAGE = "Trigger verification test"
+TEST_MESSAGE = "Added chat functionality"
 
 def fix_image_paths(content):
     """Fix image paths in markdown content to work with Flask's static files."""
@@ -95,6 +101,35 @@ def weekly(content):
                          version=VERSION, 
                          build_time=BUILD_TIME, 
                          test_message=TEST_MESSAGE)
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    try:
+        data = request.get_json()
+        user_message = data.get('message', '')
+        
+        if not user_message:
+            return jsonify({'error': 'No message provided'}), 400
+            
+        if not openai.api_key:
+            return jsonify({'error': 'OpenAI API key not configured'}), 500
+            
+        # Call OpenAI API
+        response = openai.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant for Tong's Daily Dose blog. Keep responses concise and friendly."},
+                {"role": "user", "content": user_message}
+            ],
+            max_tokens=150
+        )
+        
+        assistant_message = response.choices[0].message.content
+        return jsonify({'response': assistant_message})
+        
+    except Exception as e:
+        logger.error(f"Error in chat endpoint: {str(e)}")
+        return jsonify({'error': 'An error occurred while processing your message'}), 500
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -8,7 +8,9 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     FLASK_APP=app.py \
-    FLASK_ENV=production
+    FLASK_ENV=production \
+    PORT=8000 \
+    OPENAI_API_KEY=""
 
 # Install system dependencies
 RUN apt-get update \
