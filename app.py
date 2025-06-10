@@ -65,19 +65,36 @@ def home():
     logger.info(f"Accessing home page with version: {VERSION}")
     content = load_markdown('deepseek.md')
     logger.info(f"Content loaded, rendering template with version: {VERSION}")
-    return render_template('index.html', content=content, version=VERSION, build_time=BUILD_TIME, test_message=TEST_MESSAGE)
+    return render_template('index.html', 
+                         section='home',
+                         content=content, 
+                         version=VERSION, 
+                         build_time=BUILD_TIME, 
+                         test_message=TEST_MESSAGE)
 
-@app.route('/daily')
-def daily():
-    logger.info("Accessing daily content")
-    content = load_markdown('ModelDistillation.md')
-    return render_template('index.html', content=content, version=VERSION, build_time=BUILD_TIME, test_message=TEST_MESSAGE)
+@app.route('/daily/<content>')
+def daily(content):
+    logger.info(f"Accessing daily content: {content}")
+    content_html = load_markdown(f'{content}.md')
+    return render_template('index.html', 
+                         section='daily',
+                         subpage=content,
+                         content=content_html, 
+                         version=VERSION, 
+                         build_time=BUILD_TIME, 
+                         test_message=TEST_MESSAGE)
 
-@app.route('/weekly')
-def weekly():
-    logger.info("Accessing weekly content")
-    content = load_markdown('week1.md')
-    return render_template('index.html', content=content, version=VERSION, build_time=BUILD_TIME, test_message=TEST_MESSAGE)
+@app.route('/weekly/<content>')
+def weekly(content):
+    logger.info(f"Accessing weekly content: {content}")
+    content_html = load_markdown(f'{content}.md')
+    return render_template('index.html', 
+                         section='weekly',
+                         subpage=content,
+                         content=content_html, 
+                         version=VERSION, 
+                         build_time=BUILD_TIME, 
+                         test_message=TEST_MESSAGE)
 
 @app.errorhandler(404)
 def page_not_found(e):
