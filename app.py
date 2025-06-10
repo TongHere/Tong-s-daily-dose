@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, abort
+from flask import Flask, render_template, send_from_directory, abort, request, url_for
 import markdown
 import os
 import logging
@@ -22,7 +22,7 @@ project_name = f"projects/tongsdailydose-462517"
 app = Flask(__name__)
 
 # Version information
-VERSION = "1.0.4"
+VERSION = "1.0.5"
 BUILD_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 TEST_MESSAGE = "Trigger verification test"
 
@@ -63,19 +63,21 @@ def load_markdown(filename):
 @app.route('/')
 def home():
     logger.info(f"Accessing home page with version: {VERSION}")
-    content = load_markdown('static/content/deepseek.md')
+    content = load_markdown('deepseek.md')
     logger.info(f"Content loaded, rendering template with version: {VERSION}")
     return render_template('index.html', content=content, version=VERSION, build_time=BUILD_TIME, test_message=TEST_MESSAGE)
 
 @app.route('/daily')
 def daily():
     logger.info("Accessing daily content")
-    return render_template('index.html', content=load_markdown('deepseek.md'), version=VERSION, build_time=BUILD_TIME)
+    content = load_markdown('ModelDistillation.md')
+    return render_template('index.html', content=content, version=VERSION, build_time=BUILD_TIME, test_message=TEST_MESSAGE)
 
 @app.route('/weekly')
 def weekly():
     logger.info("Accessing weekly content")
-    return render_template('index.html', content=load_markdown('deepseek.md'), version=VERSION, build_time=BUILD_TIME)
+    content = load_markdown('week1.md')
+    return render_template('index.html', content=content, version=VERSION, build_time=BUILD_TIME, test_message=TEST_MESSAGE)
 
 @app.errorhandler(404)
 def page_not_found(e):
