@@ -22,8 +22,9 @@ project_name = f"projects/tongsdailydose-462517"
 app = Flask(__name__)
 
 # Version information
-VERSION = "1.0.3"
+VERSION = "1.0.4"
 BUILD_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+TEST_MESSAGE = "Trigger verification test"
 
 def fix_image_paths(content):
     """Fix image paths in markdown content to work with Flask's static files."""
@@ -64,7 +65,7 @@ def home():
     logger.info(f"Accessing home page with version: {VERSION}")
     content = load_markdown('static/content/deepseek.md')
     logger.info(f"Content loaded, rendering template with version: {VERSION}")
-    return render_template('index.html', content=content, version=VERSION, build_time=BUILD_TIME)
+    return render_template('index.html', content=content, version=VERSION, build_time=BUILD_TIME, test_message=TEST_MESSAGE)
 
 @app.route('/daily')
 def daily():
