@@ -106,30 +106,48 @@ def weekly(content):
 def chat():
     try:
         data = request.get_json()
+        if not data:
+            logger.error("No JSON data received")
+            return jsonify({'error': 'No data provided'}), 400
+            
         user_message = data.get('message', '')
-        
         if not user_message:
+            logger.error("Empty message received")
             return jsonify({'error': 'No message provided'}), 400
             
         if not openai.api_key:
+            logger.error("OpenAI API key not configured")
             return jsonify({'error': 'OpenAI API key not configured'}), 500
             
-        # Call OpenAI API
-        response = openai.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant for Tong's Daily Dose blog. Keep responses concise and friendly."},
-                {"role": "user", "content": user_message}
-            ],
-            max_tokens=150
-        )
+        logger.info(f"Processing chat message: {user_message[:50]}...")
         
-        assistant_message = response.choices[0].message.content
-        return jsonify({'response': assistant_message})
-        
+        try:
+            # Call OpenAI API with timeout
+            response = openai.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant for Tong's Daily Dose blog. Keep responses concise and friendly."},
+                    {"role": "user", "content": user_message}
+                ],
+                max_tokens=150,
+                temperature=0.7,
+                timeout=10  # 10 second timeout
+            )
+            
+            assistant_message = response.choices[0].message.content
+            logger.info(f"Successfully generated response: {assistant_message[:50]}...")
+            return jsonify({'response': assistant_message})
+            
+        except openai.APITimeoutError:
+            logger.error("OpenAI API request timed out")
+            return jsonify({'error': 'Request timed out. Please try again.'}), 504
+        except openai.APIError as e:
+            logger.error(f"OpenAI API error: {str(e)}")
+            return jsonify({'error': 'Error communicating with OpenAI. Please try again.'}), 502
+            
     except Exception as e:
-        logger.error(f"Error in chat endpoint: {str(e)}")
-        return jsonify({'error': 'An error occurred while processing your message'}), 500
+        logger.error(f"Unexpected error in chat endpoint: {str(e)}")
+        return jsonify({'error': 'An unexpected error occurred'}), 500
 
 @app.errorhandler(404)
 def page_not_found(e):

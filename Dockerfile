@@ -36,4 +36,4 @@ USER myuser
 EXPOSE 8000
 
 # Run the application with Gunicorn
-CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-8080} app:app"] 
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--timeout", "120", "--workers", "2", "--threads", "2", "--worker-class", "gthread", "app:app"] 
