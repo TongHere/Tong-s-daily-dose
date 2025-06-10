@@ -22,7 +22,7 @@ project_name = f"projects/tongsdailydose-462517"
 app = Flask(__name__)
 
 # Version information
-VERSION = "1.0.1"
+VERSION = "1.0.2"
 BUILD_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def fix_image_paths(content):
