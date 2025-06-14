@@ -131,7 +131,7 @@
   </head>
   <body>
     <nav class="navbar">
-      <div class="navbar-title">TongHere</div>
+      <div class="navbar-title">Hi, I'mTong</div>
       <div class="navbar-tabs">
         <div class="navbar-tab active" onclick="showTab(0)">Talk to Tong</div>
         <div class="navbar-tab" onclick="showTab(1)">My Project</div>
@@ -139,12 +139,6 @@
         <div class="navbar-tab" onclick="showTab(3)">Human and Machine Collaboration</div>
       </div>
     </nav>
-
-    <!-- Hero Section -->
-    <div class="hero" id="hero-section">
-      <div class="hero-title" id="hero-title">Talk to Tong</div>
-      <div class="hero-desc" id="hero-desc">Chat with TongHere, your AI-powered assistant for learning, projects, and more.</div>
-    </div>
 
     <!-- Main Page Cards (only visible on Talk to Tong tab) -->
     <div id="main-cards" style="background:#fff;">
@@ -178,23 +172,15 @@
             <div class="card-title">Project Highlights</div>
             <div class="card-desc">Discover my ongoing and completed projects, including code, demos, and lessons learned.</div>
           </div>
-        </div>
-        <!-- Chatbot below the cards -->
-        <div class="card-grid" style="margin-top:2rem;">
-          <div class="card" style="width:100%;max-width:600px;">
-            <div class="card-title">Chat with TongHere</div>
-            <div class="card-desc">Ask questions, get advice, or just have a conversation with your AI assistant.</div>
-            <div class="chat-container" style="width:100%;margin-top:1.5rem;">
-              <div class="chat-box" id="chatBox">
-                <div class="chat-messages" id="chatMessages">
-                  <div class="message system">Hello! This is TongHere, let's chat!</div>
-                </div>
-                <div class="chat-input">
-                  <input type="text" id="userInput" placeholder="Type your message here...">
-                  <button onclick="sendMessage()">Send</button>
-                </div>
-              </div>
-            </div>
+          <div class="card clickable" onclick="showTab(2)">
+            <div class="card-icon">🤖</div>
+            <div class="card-title">AI Product Case Study</div>
+            <div class="card-desc">In-depth analysis of a real-world AI product, including design, challenges, and impact.</div>
+          </div>
+          <div class="card clickable" onclick="showTab(3)">
+            <div class="card-icon">🧑‍💻🤝🤖</div>
+            <div class="card-title">Human & Machine Collaboration</div>
+            <div class="card-desc">Explore how humans and AI can work together to solve problems, create, and innovate.</div>
           </div>
         </div>
       </div>
@@ -229,14 +215,14 @@
           <div class="card">
             <div class="card-icon">🧑‍💻🤝🤖</div>
             <div class="card-title">Human & Machine Collaboration</div>
-            <div class="card-desc">Explore how humans and AI can work together to solve problems, create, and innovate.</div>
+            <div class="card-desc">Explore how humans and AI collaborate to create and innovate.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <footer style="text-align:center;padding:2rem 0 1rem 0;color:#888;font-size:1rem;">
-      &copy; 2024 TongHere. All rights reserved.
+    <footer style="text-align:center;padding:2rem 0 1rem 0;color:#ffffff;font-size:1rem;">
+      &copy; 2025 TongHere. All rights reserved.
     </footer>
 
     <script>
