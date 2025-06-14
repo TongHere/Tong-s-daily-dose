@@ -114,7 +114,7 @@ def chat():
             response = openai.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": "You are a helpful assistant for Tong's Daily Dose blog. Keep responses concise and friendly."},
+                    {"role": "system", "content": "You are a helpful assistant for TongHere blog. Keep responses concise and friendly."},
                     *messages
                 ],
                 max_tokens=150,
