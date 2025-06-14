@@ -115,6 +115,18 @@
         .card-grid { flex-direction: column; align-items: center; }
         .card { width: 90%; max-width: 400px; }
       }
+      .card.clickable {
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: box-shadow 0.2s, border 0.2s;
+      }
+      .card.clickable:hover {
+        border: 2px solid #1a73e8;
+        box-shadow: 0 8px 32px rgba(26,115,232,0.15);
+      }
+      #main-cards {
+        padding-bottom: 2rem;
+      }
     </style>
   </head>
   <body>
@@ -134,11 +146,41 @@
       <div class="hero-desc" id="hero-desc">Chat with TongHere, your AI-powered assistant for learning, projects, and more.</div>
     </div>
 
+    <!-- Main Page Cards (only visible on Talk to Tong tab) -->
+    <div id="main-cards" style="background:#fff;">
+      <div class="card-grid">
+        <div class="card clickable" onclick="showTab(1)">
+          <div class="card-icon">📚</div>
+          <div class="card-title">Reading Updates</div>
+          <div class="card-desc">Explore my latest reading notes, summaries, and insights from books, articles, and research.</div>
+        </div>
+        <div class="card clickable" onclick="showTab(1)">
+          <div class="card-icon">💡</div>
+          <div class="card-title">Project Highlights</div>
+          <div class="card-desc">Discover my ongoing and completed projects, including code, demos, and lessons learned.</div>
+        </div>
+      </div>
+    </div>
+
     <!-- Tab Content -->
     <div id="tab-content">
       <!-- Tab 1: Talk to Tong -->
       <div class="tab-pane" id="tab-0" style="display:block;">
+        <!-- Main Page Cards -->
         <div class="card-grid">
+          <div class="card clickable" onclick="showTab(1)">
+            <div class="card-icon">📚</div>
+            <div class="card-title">Reading Updates</div>
+            <div class="card-desc">Explore my latest reading notes, summaries, and insights from books, articles, and research.</div>
+          </div>
+          <div class="card clickable" onclick="showTab(1)">
+            <div class="card-icon">💡</div>
+            <div class="card-title">Project Highlights</div>
+            <div class="card-desc">Discover my ongoing and completed projects, including code, demos, and lessons learned.</div>
+          </div>
+        </div>
+        <!-- Chatbot below the cards -->
+        <div class="card-grid" style="margin-top:2rem;">
           <div class="card" style="width:100%;max-width:600px;">
             <div class="card-title">Chat with TongHere</div>
             <div class="card-desc">Ask questions, get advice, or just have a conversation with your AI assistant.</div>
@@ -220,6 +262,8 @@
         });
         document.getElementById('hero-title').textContent = tabTitles[idx];
         document.getElementById('hero-desc').textContent = tabDescs[idx];
+        // Show main cards only on first tab
+        document.getElementById('main-cards').style.display = (idx === 0) ? 'block' : 'none';
       }
 
       // Chat logic (same as before)
@@ -278,6 +322,9 @@
         }
       });
       renderConversation();
+
+      // Initial state
+      document.getElementById('main-cards').style.display = 'block';
     </script>
   </body>
 </html>
