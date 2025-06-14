@@ -80,22 +80,10 @@ def home():
 
 @app.route('/daily/<content>')
 def daily(content):
-    logger.info(f"Accessing daily content: {content}")
+    logger.info(f"Accessing reading content: {content}")
     content_html = load_markdown(f'{content}.md')
     return render_template('index.html', 
                          section='daily',
-                         subpage=content,
-                         content=content_html, 
-                         version=VERSION, 
-                         build_time=BUILD_TIME, 
-                         test_message=TEST_MESSAGE)
-
-@app.route('/weekly/<content>')
-def weekly(content):
-    logger.info(f"Accessing weekly content: {content}")
-    content_html = load_markdown(f'{content}.md')
-    return render_template('index.html', 
-                         section='weekly',
                          subpage=content,
                          content=content_html, 
                          version=VERSION, 

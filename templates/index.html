@@ -221,9 +221,7 @@
 
     <nav>
       <a href="{{ url_for('home') }}" {% if section == 'home' %}class="active"{% endif %}>Home</a>
-      <a href="{{ url_for('daily', content='deepseek') }}" {% if section == 'daily' %}class="active"{% endif %}>Daily</a>
-      <a href="{{ url_for('weekly', content='week1') }}" {% if section == 'weekly' %}class="active"{% endif %}>Weekly</a>
-      <a href="#" {% if section == 'resource' %}class="active"{% endif %}>Resource</a>
+      <a href="{{ url_for('daily', content='deepseek') }}" {% if section == 'daily' %}class="active"{% endif %}>Reading</a>
     </nav>
 
     <div class="content">
@@ -313,7 +311,7 @@
           renderConversation();
         </script>
       {% elif section == 'daily' %}
-        <h2>Daily Updates</h2>
+        <h2>Reading Updates</h2>
         <div class="sub-nav">
           <a href="{{ url_for('daily', content='deepseek') }}" {% if subpage == 'deepseek' %}class="active"{% endif %}>DeepSeek</a>
           <a href="{{ url_for('daily', content='ModelDistillation') }}" {% if subpage == 'ModelDistillation' %}class="active"{% endif %}>Model Distillation</a>
@@ -326,16 +324,6 @@
                 <br>
                 <small>Test: {{ test_message }}</small>
             </div>
-          </div>
-        {% endif %}
-      {% elif section == 'weekly' %}
-        <h2>Weekly Wrap-ups</h2>
-        <div class="sub-nav">
-          <a href="{{ url_for('weekly', content='week1') }}" {% if subpage == 'week1' %}class="active"{% endif %}>Week 1</a>
-        </div>
-        {% if content %}
-          <div class="markdown-content">
-            {{ content|safe }}
           </div>
         {% endif %}
       {% endif %}
