@@ -90,8 +90,8 @@ def fetch_news_data():
         url = (
             "https://newsapi.org/v2/everything?"
             "q=artificial+intelligence+OR+AI&"
-            "from=2025-07-01&"
-            "to=2025-07-12&"
+            "from=2025-07-12&"
+            "to=2025-07-14&"
             "sortBy=popularity&"
             f"domains={domain_str}&"
             f"apiKey={NEWSAPI_KEY}"
