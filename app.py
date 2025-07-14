@@ -18,12 +18,23 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Initialize Cloud Logging
-cloud_logging_client = cloud_logging.Client()
-cloud_logging_client.setup_logging()
+try:
+    cloud_logging_client = cloud_logging.Client()
+    cloud_logging_client.setup_logging()
+    logger.info("Google Cloud Logging initialized successfully")
+except Exception as e:
+    logger.warning(f"Google Cloud Logging not available (likely running locally): {e}")
+    cloud_logging_client = None
 
 # Initialize Cloud Monitoring
-monitoring_client = monitoring_v3.MetricServiceClient()
-project_name = f"projects/tongsdailydose-462517"
+try:
+    monitoring_client = monitoring_v3.MetricServiceClient()
+    project_name = f"projects/tongsdailydose-462517"
+    logger.info("Google Cloud Monitoring initialized successfully")
+except Exception as e:
+    logger.warning(f"Google Cloud Monitoring not available (likely running locally): {e}")
+    monitoring_client = None
+    project_name = None
 
 # Initialize OpenAI client
 openai.api_key = os.getenv('OPENAI_API_KEY')
