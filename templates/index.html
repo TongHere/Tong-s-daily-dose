@@ -117,6 +117,120 @@
       font-size: 1rem;
       color: #555;
     }
+
+    /* News Aggregator Styles */
+    .news-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .news-container h1 {
+      text-align: center;
+      color: #1a2a3a;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+    }
+
+    .news-subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
+    }
+
+    .news-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .news-category {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    .news-category h2 {
+      color: #1a2a3a;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 0.5rem;
+    }
+
+    .articles-list {
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .article-item {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #1a73e8;
+      transition: all 0.2s ease;
+    }
+
+    .article-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .article-source {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-date {
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a2a3a;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .article-description {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-link {
+      color: #1a73e8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .article-link:hover {
+      text-decoration: underline;
+    }
+
+    .loading {
+      text-align: center;
+      color: #666;
+      padding: 2rem;
+    }
+
+    .error {
+      text-align: center;
+      color: #d32f2f;
+      padding: 2rem;
+      background: #ffebee;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
@@ -170,11 +284,32 @@
 
   <!-- Tab 1 -->
   <div class="tab-pane" id="tab-1">
-    <div class="card-grid centered">
-      <div class="card">
-        <div class="card-icon">💡</div>
-        <div class="card-title">Project - News Aggregator</div>
-        <div class="card-desc">Aggregated daily AI news and AI knowledge updates</div>
+    <div class="news-container">
+      <h1>📰 AI News Aggregator</h1>
+      <p class="news-subtitle">Latest AI news from trusted sources</p>
+      
+      <div class="news-categories">
+        <div class="news-category">
+          <h2>💼 Business AI News</h2>
+          <div class="articles-list" id="business-articles">
+            <!-- Business articles will be loaded here -->
+          </div>
+        </div>
+        
+        <div class="news-category">
+          <h2>⚡ Tech AI News</h2>
+          <div class="articles-list" id="tech-articles">
+            <!-- Tech articles will be loaded here -->
+          </div>
+        </div>
+        
+        <div class="news-category">
+          <h2>📰 General AI News</h2>
+          <div class="articles-list" id="general-articles">
+            <!-- General articles will be loaded here -->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -226,10 +361,101 @@
       const tab = parseInt(params.get('tab'));
       if (!isNaN(tab)) {
         showTab(tab);
+        if (tab === 1) {
+          loadNewsData();
+        }
       } else {
         showTab(-1); // default to Home
       }
     });
+
+    // Function to load news data
+    async function loadNewsData() {
+      const businessContainer = document.getElementById('business-articles');
+      const techContainer = document.getElementById('tech-articles');
+      const generalContainer = document.getElementById('general-articles');
+
+      // Show loading state
+      [businessContainer, techContainer, generalContainer].forEach(container => {
+        container.innerHTML = '<div class="loading">Loading articles...</div>';
+      });
+
+      try {
+        const response = await fetch('/news');
+        const data = await response.json();
+
+        if (data.error) {
+          [businessContainer, techContainer, generalContainer].forEach(container => {
+            container.innerHTML = `<div class="error">Error: ${data.error}</div>`;
+          });
+          return;
+        }
+
+        // Display business articles
+        businessContainer.innerHTML = data.business.map(article => `
+          <div class="article-item">
+            <div class="article-source">${article.source}</div>
+            <div class="article-date">${article.published_at}</div>
+            <div class="article-title">${article.title}</div>
+            <div class="article-description">${article.description}</div>
+            <a href="${article.url}" target="_blank" class="article-link">Read full article →</a>
+          </div>
+        `).join('');
+
+        // Display tech articles
+        techContainer.innerHTML = data.tech.map(article => `
+          <div class="article-item">
+            <div class="article-source">${article.source}</div>
+            <div class="article-date">${article.published_at}</div>
+            <div class="article-title">${article.title}</div>
+            <div class="article-description">${article.description}</div>
+            <a href="${article.url}" target="_blank" class="article-link">Read full article →</a>
+          </div>
+        `).join('');
+
+        // Display general articles
+        generalContainer.innerHTML = data.general.map(article => `
+          <div class="article-item">
+            <div class="article-source">${article.source}</div>
+            <div class="article-date">${article.published_at}</div>
+            <div class="article-title">${article.title}</div>
+            <div class="article-description">${article.description}</div>
+            <a href="${article.url}" target="_blank" class="article-link">Read full article →</a>
+          </div>
+        `).join('');
+
+      } catch (error) {
+        console.error('Error loading news:', error);
+        [businessContainer, techContainer, generalContainer].forEach(container => {
+          container.innerHTML = '<div class="error">Failed to load news data</div>';
+        });
+      }
+    }
+
+    // Load news when tab 1 is shown
+    function showTab(idx) {
+      // Update navbar active class
+      document.querySelectorAll('.navbar-tab').forEach((tab, i) => {
+        tab.classList.toggle('active', i - 1 === idx);
+      });
+
+      // Show correct tab pane
+      document.querySelectorAll('.tab-pane').forEach((pane) => {
+        pane.classList.remove('active');
+      });
+
+      const tabId = idx === -1 ? 'tab--1' : 'tab-' + idx;
+      const pane = document.getElementById(tabId);
+      if (pane) pane.classList.add('active');
+
+      // Load news data if showing tab 1
+      if (idx === 1) {
+        loadNewsData();
+      }
+
+      // Update URL
+      history.replaceState(null, '', idx === -1 ? '/' : '?tab=' + idx);
+    }
   </script>
 </body>
 </html>

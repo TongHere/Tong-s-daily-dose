@@ -7,6 +7,11 @@ from google.cloud import monitoring_v3
 from google.cloud import logging as cloud_logging
 from datetime import datetime
 import openai
+import requests
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -31,6 +36,95 @@ app = Flask(__name__)
 VERSION = "1.0.6"
 BUILD_TIME = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 TEST_MESSAGE = "Added chat functionality"
+
+def fetch_news_data():
+    """Fetch news data from NewsAPI and return categorized articles."""
+    try:
+        NEWSAPI_KEY = os.getenv("NEWSAPI_KEY")
+        if not NEWSAPI_KEY:
+            logger.error("NEWSAPI_KEY environment variable not set")
+            return {"error": "NewsAPI key not configured"}
+
+        # Domain categories
+        tech_domains = {
+            "theverge.com", "technologyreview.com", "wired.com", "techcrunch.com",
+            "techradar.com", "thenextweb.com",
+        }
+        business_domains = {
+            "wsj.com", "businessinsider.com", "ft.com", "cnbc.com",
+            "bloomberg.com", "time.com",
+        }
+        general_domains = {
+            "reuters.com", "theguardian.com", "nytimes.com", "bbc.com",
+            "cnn.com", "nbcnews.com", "washingtonpost.com",
+        }
+
+        # Explicit mapping from NewsAPI source names → domains
+        name_to_domain = {
+            "The Verge": "theverge.com", "Wired": "wired.com",
+            "MIT Technology Review": "technologyreview.com", "TechCrunch": "techcrunch.com",
+            "TechRadar": "techradar.com", "The Next Web": "thenextweb.com",
+            "The Wall Street Journal": "wsj.com", "Business Insider": "businessinsider.com",
+            "Financial Times": "ft.com", "CNBC": "cnbc.com", "Bloomberg": "bloomberg.com",
+            "TIME": "time.com", "Reuters": "reuters.com", "The Guardian": "theguardian.com",
+            "The New York Times": "nytimes.com", "BBC News": "bbc.com", "CNN": "cnn.com",
+            "NBC News": "nbcnews.com", "The Washington Post": "washingtonpost.com",
+        }
+
+        # Combined domain list for the NewsAPI request
+        ai_domains = list(tech_domains | business_domains | general_domains)
+        domain_str = ",".join(ai_domains)
+
+        # Build and send the NewsAPI request
+        url = (
+            "https://newsapi.org/v2/everything?"
+            "q=artificial+intelligence+OR+AI&"
+            "from=2025-07-01&"
+            "to=2025-07-12&"
+            "sortBy=popularity&"
+            f"domains={domain_str}&"
+            f"apiKey={NEWSAPI_KEY}"
+        )
+
+        response = requests.get(url)
+        data = response.json()
+
+        if response.status_code != 200:
+            logger.error(f"NewsAPI error: {data}")
+            return {"error": f"NewsAPI error: {data.get('message', 'Unknown error')}"}
+
+        # Categorize the articles
+        business_articles, tech_articles, general_articles = [], [], []
+
+        for art in data.get("articles", []):
+            source_name = art["source"]["name"]
+            domain = name_to_domain.get(source_name, "").lower()
+
+            article = {
+                "source": source_name,
+                "title": art["title"],
+                "description": art.get("description", "No description available."),
+                "url": art["url"],
+                "published_at": art["publishedAt"][:10],  # YYYY-MM-DD
+            }
+
+            if domain in tech_domains:
+                tech_articles.append(article)
+            elif domain in business_domains:
+                business_articles.append(article)
+            elif domain in general_domains:
+                general_articles.append(article)
+
+        return {
+            "business": business_articles,
+            "tech": tech_articles,
+            "general": general_articles,
+            "total": len(business_articles) + len(tech_articles) + len(general_articles)
+        }
+
+    except Exception as e:
+        logger.error(f"Error fetching news: {str(e)}")
+        return {"error": f"Error fetching news: {str(e)}"}
 
 def fix_image_paths(content):
     """Fix image paths in markdown content to work with Flask's static files."""
@@ -89,6 +183,13 @@ def daily(content):
                          version=VERSION, 
                          build_time=BUILD_TIME, 
                          test_message=TEST_MESSAGE)
+
+@app.route('/news')
+def news():
+    """News aggregator page."""
+    logger.info("Accessing news aggregator page")
+    news_data = fetch_news_data()
+    return jsonify(news_data)
 
 @app.route('/chat', methods=['POST'])
 def chat():
