@@ -6,9 +6,9 @@ import re
 from google.cloud import monitoring_v3
 from google.cloud import logging as cloud_logging
 from datetime import datetime
-import openai
 import requests
 from dotenv import load_dotenv
+from tong_chatbot import get_chat_response, is_chatbot_configured
 
 # Load environment variables
 load_dotenv()
@@ -36,9 +36,8 @@ except Exception as e:
     monitoring_client = None
     project_name = None
 
-# Initialize OpenAI client
-openai.api_key = os.getenv('OPENAI_API_KEY')
-if not openai.api_key:
+# Check OpenAI configuration
+if not is_chatbot_configured():
     logger.warning("OPENAI_API_KEY environment variable not set")
 
 app = Flask(__name__)
@@ -204,45 +203,27 @@ def news():
 
 @app.route('/chat', methods=['POST'])
 def chat():
+    """Chat endpoint that uses the chatbot library."""
     try:
         data = request.get_json()
         logger.info(f"Received chat POST: {data}")
+        
         if not data:
             logger.error("No JSON data received")
             return jsonify({'error': 'No data provided'}), 400
+            
         user_message = data.get('message', '')
         conversation = data.get('conversation', [])
-        if not user_message:
-            logger.error("Empty message received")
-            return jsonify({'error': 'No message provided'}), 400
-        if not openai.api_key:
-            logger.error("OpenAI API key not configured")
-            return jsonify({'error': 'OpenAI API key not configured'}), 500
-        logger.info(f"Processing chat message: {user_message[:50]}...")
-        # Build messages for OpenAI
-        messages = [{"role": m["role"], "content": m["content"]} for m in conversation]
-        messages.append({"role": "user", "content": user_message})
-        try:
-            response = openai.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": "You are a helpful assistant for TongHere blog. Keep responses concise and friendly."},
-                    *messages
-                ],
-                max_tokens=150,
-                temperature=0.7,
-                timeout=10
-            )
-            assistant_message = response.choices[0].message.content if response.choices else None
-            logger.info(f"OpenAI response: {assistant_message}")
-            if assistant_message:
-                return jsonify({'response': assistant_message})
-            else:
-                logger.error("No response from OpenAI API")
-                return jsonify({'error': 'No response from OpenAI API'}), 502
-        except Exception as e:
-            logger.error(f"OpenAI API error: {str(e)}")
-            return jsonify({'error': f'OpenAI API error: {str(e)}'}), 502
+        
+        # Get response from chatbot library
+        assistant_message, error = get_chat_response(user_message, conversation)
+        
+        if error:
+            logger.error(f"Chatbot error: {error}")
+            return jsonify({'error': error}), 502
+            
+        return jsonify({'response': assistant_message})
+        
     except Exception as e:
         logger.error(f"Unexpected error in chat endpoint: {str(e)}")
         return jsonify({'error': f'Unexpected error: {str(e)}'}), 500
