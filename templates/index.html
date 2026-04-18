@@ -72,17 +72,23 @@
       padding: 0;
     }
 
+    .tab-pane#tab--1.active {
+      display: block;
+      padding: 0;
+    }
+
     .card-grid.home-centered {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: nowrap; /* 🔥 key change: keep all cards in one row */
+    flex-wrap: nowrap;
     gap: 2rem;
-    min-height: calc(100vh - 64px);
+    height: calc(100vh - 64px);
     max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem;
-    overflow-x: auto; /* enables horizontal scroll if screen is too small */
+    padding: 0 2rem;
+    box-sizing: border-box;
+    overflow: hidden;
     }
 
     .card-grid.centered {
@@ -99,7 +105,11 @@
       box-shadow: 0 4px 24px rgba(0,0,0,0.07);
       padding: 2rem;
       max-width: 320px;
+      height: 260px;
       flex: 1 1 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       text-align: center;
       text-decoration: none;
       color: inherit;
@@ -450,11 +460,6 @@
   <!-- Home -->
   <div class="tab-pane active" id="tab--1">
     <div class="card-grid home-centered">
-      <a class="card" href="?tab=0">
-        <div class="card-icon">📚</div>
-        <div class="card-title">Reading Updates</div>
-        <div class="card-desc">Deep dives, research notes, and curated reads on life and humanity.</div>
-      </a>
       <a class="card" href="?tab=1">
         <div class="card-icon">💡</div>
         <div class="card-title">Project Highlights</div>
