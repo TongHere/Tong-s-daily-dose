@@ -77,6 +77,11 @@
       padding: 0;
     }
 
+    .tab-pane#tab-4.active {
+      display: block;
+      overflow-y: auto;
+    }
+
     .card-grid.home-centered {
     display: flex;
     justify-content: center;
@@ -161,7 +166,7 @@
 
     .news-categories {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
     }
 
@@ -449,11 +454,10 @@
     <div class="navbar-title">Hi, I'm Tong</div>
     <div class="navbar-tabs">
       <div class="navbar-tab" onclick="showTab(-1)">Home</div>
-      <div class="navbar-tab" onclick="showTab(0)">Talk to Tong</div>
       <div class="navbar-tab" onclick="showTab(1)">Project Highlights</div>
       <div class="navbar-tab" onclick="showTab(2)">AI Product Case Study</div>
       <div class="navbar-tab" onclick="showTab(3)">Human & Machine Collaboration</div>
-      <a class="navbar-tab" href="/daily/deepseek">Reading</a>
+      <div class="navbar-tab" onclick="showTab(4)">Reading</div>
     </div>
   </nav>
 
@@ -475,7 +479,7 @@
         <div class="card-title">Human & Machine Collaboration</div>
         <div class="card-desc">How humans and AI co-create and solve real problems together.</div>
       </a>
-      <a class="card" href="/daily/deepseek">
+      <a class="card" href="?tab=4">
         <div class="card-icon">📖</div>
         <div class="card-title">Reading</div>
         <div class="card-desc">Deep dives, research notes, and curated reads on life and humanity.</div>
@@ -537,12 +541,6 @@
           </div>
         </div>
         
-        <div class="news-category">
-          <h2>📰 General AI News</h2>
-          <div class="articles-list" id="general-articles">
-            <!-- General articles will be loaded here -->
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -569,108 +567,21 @@
     </div>
   </div>
 
+  <!-- Tab 4: Reading -->
+  <div class="tab-pane" id="tab-4">
+    <div class="reading-container" style="max-width:800px;margin:0 auto;padding:2rem;line-height:1.7;">
+      {{ reading_content|safe }}
+    </div>
+  </div>
+
   <script>
+    // Tab index each navbar-tab maps to: Home=-1, ProjectHighlights=1, CaseStudy=2, Collaboration=3, Reading=4
+    const tabMapping = [-1, 1, 2, 3, 4];
+
     function showTab(idx) {
       // Update navbar active class
       document.querySelectorAll('.navbar-tab').forEach((tab, i) => {
-        tab.classList.toggle('active', i - 1 === idx);
-      });
-
-      // Show correct tab pane
-      document.querySelectorAll('.tab-pane').forEach((pane) => {
-        pane.classList.remove('active');
-      });
-
-      const tabId = idx === -1 ? 'tab--1' : 'tab-' + idx;
-      const pane = document.getElementById(tabId);
-      if (pane) pane.classList.add('active');
-
-      // Update URL
-      history.replaceState(null, '', idx === -1 ? '/' : '?tab=' + idx);
-    }
-
-    // On load: read tab from URL
-    window.addEventListener('DOMContentLoaded', () => {
-      const params = new URLSearchParams(window.location.search);
-      const tab = parseInt(params.get('tab'));
-      if (!isNaN(tab)) {
-        showTab(tab);
-        if (tab === 1) {
-          loadNewsData();
-        }
-      } else {
-        showTab(-1); // default to Home
-      }
-    });
-
-    // Function to load news data
-    async function loadNewsData() {
-      const businessContainer = document.getElementById('business-articles');
-      const techContainer = document.getElementById('tech-articles');
-      const generalContainer = document.getElementById('general-articles');
-
-      // Show loading state
-      [businessContainer, techContainer, generalContainer].forEach(container => {
-        container.innerHTML = '<div class="loading">Loading articles...</div>';
-      });
-
-      try {
-        const response = await fetch('/news');
-        const data = await response.json();
-
-        if (data.error) {
-          [businessContainer, techContainer, generalContainer].forEach(container => {
-            container.innerHTML = `<div class="error">Error: ${data.error}</div>`;
-          });
-          return;
-        }
-
-        // Display business articles
-        businessContainer.innerHTML = data.business.map(article => `
-          <div class="article-item">
-            <div class="article-source">${article.source}</div>
-            <div class="article-date">${article.published_at}</div>
-            <div class="article-title">${article.title}</div>
-            <div class="article-description">${article.description}</div>
-            <a href="${article.url}" target="_blank" class="article-link">Read full article →</a>
-          </div>
-        `).join('');
-
-        // Display tech articles
-        techContainer.innerHTML = data.tech.map(article => `
-          <div class="article-item">
-            <div class="article-source">${article.source}</div>
-            <div class="article-date">${article.published_at}</div>
-            <div class="article-title">${article.title}</div>
-            <div class="article-description">${article.description}</div>
-            <a href="${article.url}" target="_blank" class="article-link">Read full article →</a>
-          </div>
-        `).join('');
-
-        // Display general articles
-        generalContainer.innerHTML = data.general.map(article => `
-          <div class="article-item">
-            <div class="article-source">${article.source}</div>
-            <div class="article-date">${article.published_at}</div>
-            <div class="article-title">${article.title}</div>
-            <div class="article-description">${article.description}</div>
-            <a href="${article.url}" target="_blank" class="article-link">Read full article →</a>
-          </div>
-        `).join('');
-
-      } catch (error) {
-        console.error('Error loading news:', error);
-        [businessContainer, techContainer, generalContainer].forEach(container => {
-          container.innerHTML = '<div class="error">Failed to load news data</div>';
-        });
-      }
-    }
-
-    // Load news when tab 1 is shown
-    function showTab(idx) {
-      // Update navbar active class
-      document.querySelectorAll('.navbar-tab').forEach((tab, i) => {
-        tab.classList.toggle('active', i - 1 === idx);
+        tab.classList.toggle('active', tabMapping[i] === idx);
       });
 
       // Show correct tab pane
@@ -690,6 +601,66 @@
       // Update URL
       history.replaceState(null, '', idx === -1 ? '/' : '?tab=' + idx);
     }
+
+    // On load: read tab from URL
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const tab = parseInt(params.get('tab'));
+      if (!isNaN(tab)) {
+        showTab(tab);
+      } else {
+        showTab(-1);
+      }
+    });
+
+    // Function to load news data
+    async function loadNewsData() {
+      const businessContainer = document.getElementById('business-articles');
+      const techContainer = document.getElementById('tech-articles');
+
+      [businessContainer, techContainer].forEach(container => {
+        container.innerHTML = '<div class="loading">Loading articles...</div>';
+      });
+
+      try {
+        const response = await fetch('/news');
+        const data = await response.json();
+
+        if (data.error) {
+          [businessContainer, techContainer].forEach(container => {
+            container.innerHTML = `<div class="error">Error: ${data.error}</div>`;
+          });
+          return;
+        }
+
+        businessContainer.innerHTML = data.business.map(article => `
+          <div class="article-item">
+            <div class="article-source">${article.source}</div>
+            <div class="article-date">${article.published_at}</div>
+            <div class="article-title">${article.title}</div>
+            <div class="article-description">${article.description}</div>
+            <a href="${article.url}" target="_blank" class="article-link">Read full article →</a>
+          </div>
+        `).join('');
+
+        techContainer.innerHTML = data.tech.map(article => `
+          <div class="article-item">
+            <div class="article-source">${article.source}</div>
+            <div class="article-date">${article.published_at}</div>
+            <div class="article-title">${article.title}</div>
+            <div class="article-description">${article.description}</div>
+            <a href="${article.url}" target="_blank" class="article-link">Read full article →</a>
+          </div>
+        `).join('');
+
+      } catch (error) {
+        console.error('Error loading news:', error);
+        [businessContainer, techContainer].forEach(container => {
+          container.innerHTML = '<div class="error">Failed to load news data</div>';
+        });
+      }
+    }
+
 
     // Chatbot logic for Tab 0
     let conversation = [];
@@ -788,16 +759,6 @@
       }
     }
 
-    // Show chat tab when tab 0 is selected
-    const originalShowTab = showTab;
-    showTab = function(idx) {
-      originalShowTab(idx);
-      if (idx === 0) {
-        showChatTab();
-      } else {
-        document.getElementById('chat-container').style.display = 'none';
-      }
-    }
   </script>
 </body>
 </html>

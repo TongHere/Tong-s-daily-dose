@@ -86,11 +86,16 @@ def fetch_news_data():
         domain_str = ",".join(ai_domains)
 
         # Build and send the NewsAPI request
+        from datetime import timedelta
+        today = datetime.now()
+        from_date = (today - timedelta(days=2)).strftime("%Y-%m-%d")
+        to_date = today.strftime("%Y-%m-%d")
         url = (
             "https://newsapi.org/v2/everything?"
             "q=artificial+intelligence+OR+AI&"
-            "from=2025-07-12&"
-            "to=2025-07-14&"
+            f"from={from_date}&"
+            f"to={to_date}&"
+            "language=en&"
             "sortBy=popularity&"
             f"domains={domain_str}&"
             f"apiKey={NEWSAPI_KEY}"
@@ -184,9 +189,11 @@ def home():
     logger.info(f"Accessing home page with version: {VERSION}")
     content = load_markdown('deepseek.md')
     logger.info(f"Content loaded, rendering template with version: {VERSION}")
+    reading_content = load_markdown('deepseek.md')
     return render_template('index.html', 
                          section='home',
                          content=content, 
+                         reading_content=reading_content,
                          version=VERSION, 
                          build_time=BUILD_TIME, 
                          test_message=TEST_MESSAGE)
