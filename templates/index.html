@@ -43,6 +43,11 @@
       transition: all 0.2s;
     }
 
+    a.navbar-tab {
+      text-decoration: none;
+      color: inherit;
+    }
+
     .navbar-tab.active,
     .navbar-tab:hover {
       background: #f2f4f8;
@@ -279,7 +284,25 @@
     .chat-subtitle {
       font-size: 1rem;
       color: #666;
-      margin-bottom: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .chat-new-session-btn {
+      display: inline-block;
+      margin: 0 auto 1.5rem;
+      padding: 0.45rem 1rem;
+      font-size: 0.875rem;
+      color: #5f6368;
+      background: #f1f3f4;
+      border: 1px solid #e0e0e0;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .chat-new-session-btn:hover {
+      background: #e8eaed;
+      border-color: #dadce0;
     }
 
     .chat-messages {
@@ -420,6 +443,7 @@
       <div class="navbar-tab" onclick="showTab(1)">Project Highlights</div>
       <div class="navbar-tab" onclick="showTab(2)">AI Product Case Study</div>
       <div class="navbar-tab" onclick="showTab(3)">Human & Machine Collaboration</div>
+      <a class="navbar-tab" href="/daily/deepseek">Reading</a>
     </div>
   </nav>
 
@@ -429,7 +453,7 @@
       <a class="card" href="?tab=0">
         <div class="card-icon">📚</div>
         <div class="card-title">Reading Updates</div>
-        <div class="card-desc">Explore my latest reading notes and research summaries.</div>
+        <div class="card-desc">Deep dives, research notes, and curated reads on life and humanity.</div>
       </a>
       <a class="card" href="?tab=1">
         <div class="card-icon">💡</div>
@@ -446,6 +470,11 @@
         <div class="card-title">Human & Machine Collaboration</div>
         <div class="card-desc">How humans and AI co-create and solve real problems together.</div>
       </a>
+      <a class="card" href="/daily/deepseek">
+        <div class="card-icon">📖</div>
+        <div class="card-title">Reading</div>
+        <div class="card-desc">Deep dives, research notes, and curated reads on life and humanity.</div>
+      </a>
     </div>
   </div>
 
@@ -456,6 +485,7 @@
         <div class="chat-logo">TC</div>
         <h1 class="chat-title">Start chatting</h1>
         <p class="chat-subtitle">Hi, what can I help you with?</p>
+        <button type="button" class="chat-new-session-btn" id="chat-new-session-btn" aria-label="Start a new chat session">New chat</button>
       </div>
       
       <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
@@ -658,6 +688,18 @@
 
     // Chatbot logic for Tab 0
     let conversation = [];
+
+    function startNewChatSession() {
+      conversation = [];
+      const chat = document.getElementById('chat-messages');
+      if (chat) chat.innerHTML = '';
+      const loading = document.getElementById('chat-loading');
+      if (loading) loading.remove();
+      setLoading(false);
+      const input = document.getElementById('chat-input');
+      if (input) input.focus();
+    }
+
     function showChatTab() {
       document.getElementById('chat-container').style.display = 'flex';
       document.getElementById('chat-input').focus();
@@ -669,6 +711,10 @@
       const chatSendBtn = document.getElementById('chat-send-btn');
       
       if (chatInput && chatSendBtn) {
+        const newSessionBtn = document.getElementById('chat-new-session-btn');
+        if (newSessionBtn) {
+          newSessionBtn.addEventListener('click', startNewChatSession);
+        }
         // Handle send button click
         chatSendBtn.addEventListener('click', handleChatSubmit);
         

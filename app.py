@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, abort, request, url_for, jsonify
+from flask import Flask, render_template, send_from_directory, abort, request, url_for, jsonify, Response
 import markdown
 import os
 import logging
@@ -170,6 +170,15 @@ def load_markdown(filename):
         logger.error(f"Error loading {filename}: {str(e)}")
         return f"Error loading content: {str(e)}"
 
+def render_article_page(md_filename: str, page_title: str):
+    """Render markdown from static/content as a standalone article page."""
+    content_html = load_markdown(md_filename)
+    return render_template(
+        'article.html',
+        content=content_html,
+        page_title=page_title,
+    )
+
 @app.route('/')
 def home():
     logger.info(f"Accessing home page with version: {VERSION}")
@@ -182,17 +191,25 @@ def home():
                          build_time=BUILD_TIME, 
                          test_message=TEST_MESSAGE)
 
+# @app.route('/music-ai')
+# def music_ai():
+#     """Writing space for Music AI notes."""
+#     logger.info("Accessing Music AI page")
+#     return render_article_page('music-ai.md', 'Music AI')
+
+# @app.route('/vibe-coder')
+# def vibe_coder():
+#     """Writing space for vibe coding notes."""
+#     logger.info("Accessing Vibe Coder page")
+#     return render_article_page('vibe-coder.md', 'Vibe Coder')
+
 @app.route('/daily/<content>')
 def daily(content):
     logger.info(f"Accessing reading content: {content}")
-    content_html = load_markdown(f'{content}.md')
-    return render_template('index.html', 
-                         section='daily',
-                         subpage=content,
-                         content=content_html, 
-                         version=VERSION, 
-                         build_time=BUILD_TIME, 
-                         test_message=TEST_MESSAGE)
+    if not re.fullmatch(r'[\w-]+', content or ''):
+        abort(404)
+    page_title = content.replace('-', ' ').title()
+    return render_article_page(f'{content}.md', page_title)
 
 @app.route('/news')
 def news():
@@ -228,15 +245,49 @@ def chat():
         logger.error(f"Unexpected error in chat endpoint: {str(e)}")
         return jsonify({'error': f'Unexpected error: {str(e)}'}), 500
 
+def _minimal_error_page(status: int, title: str, message: str) -> Response:
+    """Plain HTML fallback if template rendering fails (avoids error-handler loops)."""
+    body = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{title} · TongHere</title>
+  <style>
+    body {{ font-family: system-ui, sans-serif; margin: 0; min-height: 100vh; display: flex;
+      flex-direction: column; align-items: center; justify-content: center; background: #fafbfc; color: #1a1a1a; }}
+    a {{ color: #1a73e8; font-weight: 600; }}
+  </style>
+</head>
+<body>
+  <h1>{title}</h1>
+  <p>{message}</p>
+  <p><a href="/">Return to home</a></p>
+</body>
+</html>"""
+    return Response(body, status=status, mimetype="text/html; charset=utf-8")
+
 @app.errorhandler(404)
 def page_not_found(e):
     logger.error(f"Page not found: {request.path}")
-    return render_template('404.html'), 404
+    try:
+        return render_template("404.html"), 404
+    except Exception as ex:
+        logger.error(f"404 template failed: {ex}")
+        return _minimal_error_page(404, "Page not found", "Sorry, that page does not exist.")
 
 @app.errorhandler(500)
 def internal_server_error(e):
     logger.error(f"Internal server error: {str(e)}")
-    return render_template('500.html'), 500
+    try:
+        return render_template("500.html"), 500
+    except Exception as ex:
+        logger.error(f"500 template failed: {ex}")
+        return _minimal_error_page(
+            500,
+            "Something went wrong",
+            "Sorry, something went wrong. Please try again later.",
+        )
 
 if __name__ == '__main__':
     # Use environment variable for port, default to 8000

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ page_title }} · TongHere</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: #fafbfc;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      height: 56px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .navbar-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .navbar-brand:hover {
+      color: #1a73e8;
+    }
+
+    .navbar-back {
+      font-size: 0.95rem;
+      color: #1a73e8;
+      font-weight: 500;
+    }
+
+    .article-shell {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .article-kicker {
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #667eea;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-body {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem 2.25rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .article-body h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin: 0 0 1rem;
+      line-height: 1.25;
+      color: #111;
+    }
+
+    .article-body h2 {
+      font-size: 1.35rem;
+      font-weight: 650;
+      margin: 2rem 0 0.75rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #eee;
+      color: #1a2a3a;
+    }
+
+    .article-body h2:first-of-type {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .article-body h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 1.25rem 0 0.5rem;
+      color: #333;
+    }
+
+    .article-body p {
+      margin: 0.75rem 0;
+    }
+
+    .article-body ul, .article-body ol {
+      margin: 0.5rem 0 1rem;
+      padding-left: 1.35rem;
+    }
+
+    .article-body li {
+      margin: 0.35rem 0;
+    }
+
+    .article-body a {
+      color: #1a73e8;
+    }
+
+    .article-body blockquote {
+      margin: 1rem 0;
+      padding: 0.75rem 1rem;
+      border-left: 4px solid #667eea;
+      background: #f6f8ff;
+      color: #444;
+    }
+
+    .article-body code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+      font-size: 0.9em;
+      background: #f1f3f4;
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+    }
+
+    .article-body pre {
+      background: #1e1e2e;
+      color: #e8e8ed;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .article-body pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    .article-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    .article-body th, .article-body td {
+      border: 1px solid #e0e0e0;
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+    }
+
+    .article-body th {
+      background: #f5f6f8;
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid #e8eaed;
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a class="navbar-brand" href="/">Hi, I'm Tong</a>
+    <a class="navbar-back" href="/">← Home</a>
+  </nav>
+
+  <main class="article-shell">
+    <div class="article-kicker">Notes</div>
+    <article class="article-body">
+      {{ content|safe }}
+    </article>
+  </main>
+</body>
+</html>
