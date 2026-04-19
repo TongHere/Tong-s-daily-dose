@@ -569,8 +569,20 @@
 
   <!-- Tab 4: Reading -->
   <div class="tab-pane" id="tab-4">
-    <div class="reading-container" style="max-width:800px;margin:0 auto;padding:2rem;line-height:1.7;">
-      {{ reading_content|safe }}
+    <div class="reading-container" style="max-width:900px;margin:0 auto;padding:2rem;">
+      <h1 style="text-align:center;margin-bottom:0.5rem;">Reading</h1>
+      <p style="text-align:center;color:#666;margin-bottom:2rem;">Deep dives, research notes, and curated reads on life and humanity.</p>
+      <div id="reading-list" style="display:flex;flex-direction:column;gap:1.5rem;">
+        <a href="/daily/deepseek" class="article-item" style="text-decoration:none;color:inherit;display:block;">
+          <div class="article-title">Notes for DeepSeek Paper</div>
+          <div class="article-description">DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.</div>
+        </a>
+        <a href="/daily/zero-shot-clinical" class="article-item" style="text-decoration:none;color:inherit;display:block;">
+          <div class="article-date">2026-04-19</div>
+          <div class="article-title">Why 'Zero-Shot' Clinical Predictions Are Risky</div>
+          <div class="article-description">How to interpret 'zero-shot' results from generative EHR models — a new evaluation framework for responsible clinical AI.</div>
+        </a>
+      </div>
     </div>
   </div>
 
