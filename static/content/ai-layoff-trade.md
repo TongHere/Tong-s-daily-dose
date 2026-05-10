@@ -10,6 +10,8 @@
 
 ---
 
+![AI Layoff Trade Diagram](images/ai-layoff-trade-diagram.png)
+
 Recent trends show AI automation driving massive workforce reductions, such as Block cutting nearly half of its 10,000-person staff and Salesforce laying off 4,000 workers to transition toward agentic AI. 
 
 Currently, AI often serves as a substitute for labor rather than a reinstating complement. For an individual firm, this automation is highly attractive because it drastically reduces production costs and allows the firm to capture a larger share of expenditure, potentially increasing revenue. 
