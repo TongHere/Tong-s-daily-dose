@@ -147,12 +147,11 @@ def fix_image_paths(content):
     def replace_img_path(match):
         img_path = match.group(1)
         if not img_path.startswith(('http://', 'https://')):
-            # Convert relative path to Flask static URL
-            return f'<img src="{url_for("static", filename=img_path)}"'
+            return f'src="{url_for("static", filename=img_path)}"'
         return match.group(0)
 
     # Find all img tags and fix their src attributes
-    content = re.sub(r'<img src="([^"]+)"', replace_img_path, content)
+    content = re.sub(r'src="([^"]+)"', replace_img_path, content)
     return content
 
 def load_markdown(filename):
