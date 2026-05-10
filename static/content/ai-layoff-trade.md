@@ -6,7 +6,7 @@
 - Brett Hemenway Falk — Computer and Information Science, University of Pennsylvania
 - Gerry Tsoukalas — Boston University Questrom
 
-**Source:** [Overcoming the Incentive Collapse Paradox — arXiv](https://arxiv.org/abs/2603.27049)
+**Source:** [The AI Layoff Trap — arXiv](https://arxiv.org/abs/2603.20617)
 
 ---
 
