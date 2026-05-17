@@ -2,6 +2,10 @@
 
 **Date:** May 17, 2026
 
+**Paper:** Chung, A. T.-H. *et al.* [Improving access to essential medicines via decision-aware machine learning](https://www.nature.com/articles/d41586-026-01152-0). *Nature* (2026).
+
+**Author:** [Angel Tsai-Hsuan Chung](https://angel-chung.github.io/fieldwork/)
+
 ---
 
 Key takeaway : 
