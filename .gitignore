@@ -1,3 +1,7 @@
+# Private notes
+static/content/private-notes.md
+static/content/private-notes/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

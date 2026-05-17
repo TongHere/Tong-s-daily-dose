@@ -165,8 +165,21 @@ def load_markdown(filename):
         with open(file_path, 'r', encoding='utf-8') as f:
             md_content = f.read()
             logger.info(f"Successfully loaded {filename}")
+            # Protect LaTeX math blocks from markdown processing
+            math_blocks = {}
+            counter = [0]
+            def protect_math(match):
+                key = f"MATHBLOCK{counter[0]}END"
+                math_blocks[key] = match.group(0)
+                counter[0] += 1
+                return key
+            md_content = re.sub(r'\$\$[\s\S]*?\$\$', protect_math, md_content)
+            md_content = re.sub(r'\$[^\n$]+?\$', protect_math, md_content)
             # Convert markdown to HTML
             html_content = markdown.markdown(md_content, extensions=['tables', 'fenced_code'])
+            # Restore LaTeX math blocks
+            for key, val in math_blocks.items():
+                html_content = html_content.replace(key, val)
             # Fix image paths
             html_content = fix_image_paths(html_content)
             return html_content
