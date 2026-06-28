@@ -58,12 +58,6 @@ Their patent-pending architecture called "Eidetic Intelligence" is the core tech
 - Validates outputs at every stage to **prevent hallucinations**
 - Claims **90% legal accuracy** vs. Claude Cowork at 79.3% and ChatGPT at 37.3% in a 65-document benchmark
 
-### Business Model
-
-- **Free** — $56/mo, 1 user, limited AI tokens, insights from 10 docs, no document exports
-- **Pro** — $240/mo, 5 users, 10x AI tokens, insights from 50 docs, agentic workflows, playbooks & rules
-- **Enterprise** — Custom pricing, unlimited users & AI tokens, 150+ jurisdictions, SSO, API/MCP integrations, dedicated CS
-
 ### Target Customers
 
 * **Commercial & Sales Teams:** Salespeople who need to close deals without waiting for a legal department to review every redline. (Example: HoSt Group empowers 25 salespeople to negotiate complex contracts without an in-house legal team; ProConvey's Sales & Marketing Lead uses it to draft software licensing agreements.)
@@ -83,6 +77,8 @@ Moreover, Genie AI's responses feel less personalised compared to other AI tools
 
 **2. Google Market Keywords Search:**
 Not many people seem to search for it yet. It has some traffic, but most is for the Google Genie AI model.
+
+![Genie AI Google Trends](images/genieai-google-trends.png)
 
 ### The Competitors
 
