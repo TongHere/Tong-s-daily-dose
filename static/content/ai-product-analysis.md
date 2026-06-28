@@ -28,7 +28,7 @@ Business teams (sales, ops, founders) constantly deal with contracts but lack in
 
 **1. Landing — Conversational prompt with task modes**
 
-![Genie AI Home](../../images/genieai-home.png)
+![Genie AI Home](images/genieai-home.png)
 
 The user lands on a clean, chat-style interface. A natural-language prompt box asks "What legal work can I help you with?" with a pre-filled example for reviewing a commercial lease. Below, task mode pills (Shuffle, Draft, Review, Research, Negotiate, Analyse, Compare, Comply, Summarise, Extract, Ask) let users switch intent quickly.
 
@@ -36,14 +36,14 @@ Based on different agreement types, there are customised prompt templates that u
 
 **2. Selecting a review workflow**
 
-![Genie AI Review Modes](../../images/genieai-review-modes.png)
+![Genie AI Review Modes](images/genieai-review-modes.png)
 
 After choosing "Review," the user sees templated review workflows: upload the agreement you want reviewed, then ask the questions you're curious about.
 The AI review model asks follow-up questions to ensure the user's intent is correct before querying for the right answers.
 
 **3. Output — Structured legal analysis with actionable recommendations**
 
-![Genie AI Lease Review Output](../../images/genieai-lease-review-output.png)
+![Genie AI Lease Review Output](images/genieai-lease-review-output.png)
 
 The output is a structured report. Issues are automatically categorised by severity (CRITICAL), linked to source clauses, and broken into specific sub-problems (e.g., deposit amount, instalment rights, forfeiture clauses). Each issue cites the relevant German legal statute (BGB) and ends with a clear recommendation and summary.
 
