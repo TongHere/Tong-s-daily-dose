@@ -6,6 +6,8 @@
 
 ## Use Case: Genie AI (genieai.co)
 
+![Genie AI Landing Page](images/genieai-landing.png)
+
 ### What Is It?
 
 Genie AI is an AI-powered legal agent that helps business teams draft, review, edit, and negotiate contracts autonomously. Launched in 2017 by founders taught by Google DeepMind, it positions itself as "The Global Legal Brain" — an organisation-wide legal intelligence layer that learns your rules, playbooks, and negotiation history over time. Backed by Google Ventures and Khosla Ventures with $17.8M (£13.3M) Series A funding.
