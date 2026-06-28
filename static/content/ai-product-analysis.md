@@ -99,33 +99,37 @@ Traditional law firms (trusted but slow/expensive), static template libraries (L
 
 ### Summary Analysis
 
-#### Product Positioning
+#### 1. Product Positioning / User Analysis / Business Model
+
+**Product Positioning**
 
 Legal AI — contract reviews, contract drafting, document comparison, document organisation, insight extraction from contracts, template filling, and recommendations.
 
-#### User Analysis
+**User Analysis**
 
 | Segment | Description | Example |
 |---|---|---|
-| Commercial & Sales Teams | Salespeople who need to close deals without waiting for legal to review every redline | HoSt Group empowers 25 salespeople to negotiate complex contracts without an in-house legal team |
-| Founders & Agency Owners | Solo founders or startup leaders who are cost-sensitive and need to move fast without feeling legally exposed | Sam Crisp (Axonas) and a seed-stage MedTech founder used it for £1.5m fundraising rounds |
-| In-House Legal & Compliance Leads | Solo legal counsels or small legal teams drowning in high-volume, low-complexity paperwork | Jude Legg (Firefish) extrapolates risks from 40-page MSAs quickly |
-| Solo Practice Attorneys | Independent lawyers who use Genie AI as a "foundational tool" — an incredibly fast paralegal | Amier Carmel (US attorney) drafts briefs and complaints 75% faster |
-| Directors & Procurement | Executives and buyers who manage supplier agreements, leases, and vendor contracts | — |
+| Commercial & Sales Teams | Salespeople who need to close deals without waiting for legal to review every redline. | HoSt Group empowers 25 salespeople to negotiate complex contracts without an in-house legal team; ProConvey's Sales & Marketing Lead uses it to draft software licensing agreements. |
+| Founders & Agency Owners | Solo founders or startup leaders who are cost-sensitive and need to move fast without feeling legally exposed. | Sam Crisp, founder of recruitment consultancy Axonas, and a seed-stage MedTech startup founder who used it for £1.5m fundraising rounds. |
+| In-House Legal & Compliance Leads | Solo legal counsels or small legal teams at mid-sized companies drowning in high-volume, low-complexity paperwork. | Jude Legg, Legal & Compliance Lead at Firefish, who uses it to extrapolate risks from 40-page MSAs quickly. |
+| Solo Practice Attorneys | Independent lawyers who use Genie AI as a "foundational tool" to act as an incredibly fast paralegal. | Amier Carmel, a US attorney running a solo workplace discrimination firm, who drafts briefs and complaints 75% faster. |
+| Directors & Procurement | Executives and buyers who manage supplier agreements, leases, and vendor contracts. | — |
 
-#### Business Model
+**Business Model**
 
 B2B and B2C subscription-based.
 
-| Tier | Price | Users | Key Features |
+| Tier | Price | Users | Highlights |
 |---|---|---|---|
 | Free | $56/mo | 1 | Limited AI tokens, insights from 10 docs, no document exports |
 | Pro | $240/mo | 5 | 10x AI tokens, insights from 50 docs, agentic workflows, playbooks & rules |
 | Enterprise | Custom | Unlimited | Unlimited AI tokens, 150+ jurisdictions, SSO, API/MCP integrations, dedicated CS |
 
-#### SWOT Matrix
+#### 2. SWOT Matrix
 
 | | Positive | Negative |
 |---|---|---|
-| **Internal** | **Strengths:** End-to-end workflow — drafting, reviewing, extracting insights, and comparing contracts. Easy to prompt with many default templates in chat mode. | **Weaknesses:** Less personalised solution; lacks creative request handling. |
-| **External** | **Opportunities:** By targeting individual everyday users, they can win on volume, lower prices, and build a loyal community. Being on a smartphone means always in the user's pocket. | **Threats:** The B2C mobile market moves fast. Bigger competitors can copy unique features quickly and outspend with massive marketing budgets. |
+| **Internal** | **Strengths:** End-to-end workflow — from drafting, reviewing, extracting insights, and comparing contracts. Easy to prompt with many default templates in chat mode. | **Weaknesses:** Less personalised solution; it lacks creative request handling. |
+| **External** | **Opportunities:** By targeting individual everyday users, they can win on volume, lower prices, and build a highly loyal community of fans. Being on a smartphone means always being in the user's pocket, making it incredibly easy to open the app the exact second they need it. | **Threats:** The B2C mobile market moves fast. Bigger competitors can copy unique mobile features quickly and use their massive marketing budgets to outspend them. |
+
+---
