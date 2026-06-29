@@ -87,6 +87,11 @@
       overflow-y: auto;
     }
 
+    .tab-pane#tab-5.active {
+      display: block;
+      overflow-y: auto;
+    }
+
     .card-grid.home-centered {
     display: flex;
     justify-content: center;
@@ -462,6 +467,7 @@
       <div class="navbar-tab" onclick="showTab(1)">Project Highlights</div>
       <div class="navbar-tab" onclick="showTab(2)">AI Product Case Study</div>
       <div class="navbar-tab" onclick="showTab(3)">Human & Machine Collaboration</div>
+      <div class="navbar-tab" onclick="showTab(5)">Coding Journey</div>
       <div class="navbar-tab" onclick="showTab(4)">Reading</div>
     </div>
   </nav>
@@ -483,6 +489,11 @@
         <div class="card-icon">🧑‍💻🤝🤖</div>
         <div class="card-title">Human & Machine Collaboration</div>
         <div class="card-desc">How humans and AI co-create and solve real problems together.</div>
+      </a>
+      <a class="card" href="?tab=5">
+        <div class="card-icon">💻</div>
+        <div class="card-title">Coding Journey</div>
+        <div class="card-desc">Lessons, reflections, and stories from building with code.</div>
       </a>
       <a class="card" href="?tab=4">
         <div class="card-icon">📖</div>
@@ -585,6 +596,25 @@
     </div>
   </div>
 
+  <!-- Tab 5: Coding Journey -->
+  <div class="tab-pane" id="tab-5">
+    <div class="reading-container" style="max-width:900px;margin:0 auto;padding:2rem;">
+      <h1 style="text-align:center;margin-bottom:0.5rem;">💻 Coding Journey</h1>
+      <p style="text-align:center;color:#666;margin-bottom:2rem;">Lessons, reflections, and stories from building with code.</p>
+      <div style="display:flex;flex-direction:column;gap:1.5rem;">
+        <a href="/daily/talking-with-cs-student" class="article-item" style="text-decoration:none;color:inherit;display:block;">
+          <div class="article-date">2026-05-09</div>
+          <div class="article-title">Talking with a CS Student</div>
+          <div class="article-description">A conversation about career paths, learning to code, and navigating the tech industry.</div>
+        </a>
+        <a href="/daily/vibe-coder" class="article-item" style="text-decoration:none;color:inherit;display:block;">
+          <div class="article-title">Vibe Coder</div>
+          <div class="article-description">Notes on flow-state building: AI pair programming, tools, and how it feels to ship fast without losing the plot.</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Tab 4: Reading -->
   <div class="tab-pane" id="tab-4">
     <div class="reading-container" style="max-width:900px;margin:0 auto;padding:2rem;">
@@ -616,8 +646,8 @@
 
 
   <script>
-    // Tab index each navbar-tab maps to: Home=-1, ProjectHighlights=1, CaseStudy=2, Collaboration=3, Reading=4
-    const tabMapping = [-1, 1, 2, 3, 4];
+    // Tab index each navbar-tab maps to: Home=-1, ProjectHighlights=1, CaseStudy=2, Collaboration=3, CodingJourney=5, Reading=4
+    const tabMapping = [-1, 1, 2, 3, 5, 4];
 
     function showTab(idx) {
       // Update navbar active class
