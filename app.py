@@ -3,10 +3,8 @@ import markdown
 import os
 import logging
 import re
-from google.cloud import monitoring_v3
 from google.cloud import logging as cloud_logging
 from datetime import datetime
-import requests
 from dotenv import load_dotenv
 from tong_chatbot import get_chat_response, is_chatbot_configured
 
@@ -25,16 +23,6 @@ try:
 except Exception as e:
     logger.warning(f"Google Cloud Logging not available (likely running locally): {e}")
     cloud_logging_client = None
-
-# Initialize Cloud Monitoring
-try:
-    monitoring_client = monitoring_v3.MetricServiceClient()
-    project_name = f"projects/tongsdailydose-462517"
-    logger.info("Google Cloud Monitoring initialized successfully")
-except Exception as e:
-    logger.warning(f"Google Cloud Monitoring not available (likely running locally): {e}")
-    monitoring_client = None
-    project_name = None
 
 # Check OpenAI configuration
 if not is_chatbot_configured():
@@ -85,7 +73,7 @@ def fetch_news_data():
         ai_domains = list(tech_domains | business_domains | general_domains)
         domain_str = ",".join(ai_domains)
 
-        # Build and send the NewsAPI request
+        import requests
         from datetime import timedelta
         today = datetime.now()
         from_date = (today - timedelta(days=2)).strftime("%Y-%m-%d")

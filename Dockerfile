@@ -12,12 +12,6 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PORT=8000 \
     OPENAI_API_KEY=""
 
-# Install system dependencies
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
 # Copy requirements file
 COPY requirements.txt .
 
@@ -35,5 +29,5 @@ USER myuser
 # Expose port
 EXPOSE 8000
 
-# Run the application with Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--timeout", "120", "--workers", "2", "--threads", "2", "--worker-class", "gthread", "app:app"] 
+# Run the application with Gunicorn (--preload imports app once in master process)
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--timeout", "120", "--workers", "2", "--threads", "2", "--worker-class", "gthread", "--preload", "app:app"]

@@ -22,6 +22,8 @@ steps:
       - 'managed'
       - '--allow-unauthenticated'
       - '--port=8000'
+      - '--cpu-boost'
+      # - '--min-instances=1'  # Keeps one instance warm (costs ~$5-10/mo)
 
 images:
   - gcr.io/$PROJECT_ID/tong-daily-dose:latest
