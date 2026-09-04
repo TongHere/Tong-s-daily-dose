@@ -10,9 +10,7 @@ Contracts are a system of record, acting as documents for recording obligations.
 
 A lawyer acts as an advocate for people's rights and fairness. Furthermore, the most important aspect is trustworthiness; without it, trade would never happen, which would create problems and losses for both parties.
 
-After 4,000 years, the core value and functionality of both lawyers and contracts remain the same, revealing that no matter how technology changes, their core value and purpose remain unchanged.
-
-Nowadays, AI is rapidly transforming the legal world; from my perspective, it streamlines long-tail legal tasks, but the core values of the legal profession remain unchanged.
+The core purpose of lawyers and contracts hasn't changed in 4,000 years. AI is certainly reshaping the legal world by taking over the heavy lifting of routine tasks, but just like any past tech evolution, the human elements of law remains unchanged. Ultimately, fairness, trust, and risk management are what truly hold contracts and client relationships together. 
 
 ---
 
