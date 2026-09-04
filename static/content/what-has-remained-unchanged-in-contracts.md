@@ -14,13 +14,15 @@ After 4,000 years, the core value and functionality of both lawyers and contract
 
 Nowadays, AI is rapidly transforming the legal world; from my perspective, it streamlines long-tail legal tasks, but the core values of the legal profession remain unchanged.
 
-What humans look for remains the same — fairness, trust, and risk management.
+---
 
 Having worked on a contract system for almost a year, I am still fascinated by the complexity of contracts.
 
-Curiosity drove me to deep dive into what the earliest contracts looked like and how the first lawyers in human history came to be.
+Curiosity drove me to deep dive into what the earliest contracts looked like and how the first lawyers in human history came to be. 
 
----
+So I did some research to feed my curiosity. 
+
+
 ![A cuneiform tablet with a marriage contract from Kültepe-Kanesh, Turkey](images/cuneiform-marriage-contract.jpg)
 
 *A cuneiform tablet with a marriage contract from Kültepe-Kanesh, Turkey. Courtesy [Atlas Obscura](https://www.atlasobscura.com/articles/cuneiform-tablet-marriage-contract-infertility-surrogate-mother-assyrian) / Ahmet Berkız Turp, Harran University.*
