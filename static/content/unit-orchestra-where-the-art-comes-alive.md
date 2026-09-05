@@ -8,9 +8,7 @@
 
 
 ## My perspective
-From my perspective, using the Mighty Wurlitzer to perform is conceptually very similar to how AI generates music today. People can use prompts to create an entire piece of music. However, I see an important difference: with the Mighty Wurlitzer, as with other forms of musical performance, musicians actively participate in the process. They experience, engage with, and shape the music through their performance and interaction with the instrument itself. This process is very different from simply writing a prompt and having AI generate the music.
-
-With AI, humans participate mainly through writing prompts. From my perspective, this raises an interesting question: should poets or writers be the ones crafting prompts to create AI-generated music instead?
+From my perspective, using the Mighty Wurlitzer to perform is conceptually very similar to how AI generates music today. People can use prompts to create an entire piece of music. However, I see an important difference: with the Mighty Wurlitzer, as with other forms of musical performance, musicians actively participate in the process. They experience, engage with, and shape the music through their performance and interaction with the instrument itself. This process is very different from simply writing a prompt and having AI generate the music. With AI, humans participate mainly through writing prompts. From my perspective, this raises an interesting question: should poets or writers be the ones crafting prompts to create AI-generated music instead?
 ---
 
 ## The Mighty Wurlitzer
