@@ -74,6 +74,7 @@
       width: 100%;
       height: auto;
       border-radius: 8px;
+      margin: 0.35rem 0 0.4rem;
     }
 
     .article-kicker {
@@ -95,35 +96,51 @@
     .article-body h1 {
       font-size: 1.85rem;
       font-weight: 700;
-      margin: 0 0 1rem;
+      margin: 0 0 0.45rem;
       line-height: 1.25;
       color: #111;
+      letter-spacing: -0.02em;
+    }
+
+    .article-body h1 + p {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: #6b7280;
+      margin: 0 0 1.25rem;
     }
 
     .article-body h2 {
-      font-size: 1.35rem;
+      font-size: 1.28rem;
       font-weight: 650;
-      margin: 2rem 0 0.75rem;
-      padding-top: 0.5rem;
-      border-top: 1px solid #eee;
+      margin: 1.75rem 0 0.7rem;
+      padding-top: 0.15rem;
       color: #1a2a3a;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
     }
 
-    .article-body h2:first-of-type {
-      border-top: none;
+    .article-body hr + h2 {
       margin-top: 0;
       padding-top: 0;
     }
 
     .article-body h3 {
-      font-size: 1.1rem;
+      font-size: 1.08rem;
       font-weight: 600;
-      margin: 1.25rem 0 0.5rem;
+      margin: 1.35rem 0 0.45rem;
       color: #333;
     }
 
     .article-body p {
-      margin: 0.75rem 0;
+      margin: 0.7rem 0;
+      font-size: 1.04rem;
+    }
+
+    .article-body p:has(> em:only-child) {
+      font-size: 0.88rem;
+      color: #6b7280;
+      text-align: center;
+      margin: 0.15rem 0 0.25rem;
     }
 
     .article-body ul, .article-body ol {
@@ -190,8 +207,8 @@
 
     .article-body hr {
       border: none;
-      border-top: 1px solid #e8eaed;
-      margin: 2rem 0;
+      border-top: 1px solid #e5e7eb;
+      margin: 1.75rem 0;
     }
   </style>
 </head>
