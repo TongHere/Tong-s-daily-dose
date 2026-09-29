@@ -87,11 +87,6 @@
       overflow-y: auto;
     }
 
-    .tab-pane#tab-5.active {
-      display: block;
-      overflow-y: auto;
-    }
-
     .card-grid.home-centered {
     display: flex;
     justify-content: center;
@@ -467,7 +462,6 @@
       <div class="navbar-tab" onclick="showTab(1)">Project Highlights</div>
       <div class="navbar-tab" onclick="showTab(2)">AI Product Case Study</div>
       <div class="navbar-tab" onclick="showTab(3)">Human & Machine Collaboration</div>
-      <div class="navbar-tab" onclick="showTab(5)">Coding Journey</div>
       <div class="navbar-tab" onclick="showTab(4)">Reading</div>
     </div>
   </nav>
@@ -489,11 +483,6 @@
         <div class="card-icon">🧑‍💻🤝🤖</div>
         <div class="card-title">Human & Machine Collaboration</div>
         <div class="card-desc">How humans and AI co-create and solve real problems together.</div>
-      </a>
-      <a class="card" href="?tab=5">
-        <div class="card-icon">💻</div>
-        <div class="card-title">Coding Journey</div>
-        <div class="card-desc">Lessons, reflections, and stories from building with code.</div>
       </a>
       <a class="card" href="?tab=4">
         <div class="card-icon">📖</div>
@@ -596,64 +585,45 @@
     </div>
   </div>
 
-  <!-- Tab 5: Coding Journey -->
-  <div class="tab-pane" id="tab-5">
-    <div class="reading-container" style="max-width:900px;margin:0 auto;padding:2rem;">
-      <h1 style="text-align:center;margin-bottom:0.5rem;">💻 Coding Journey</h1>
-      <p style="text-align:center;color:#666;margin-bottom:2rem;">Lessons, reflections, and stories from building with code.</p>
-      <div style="display:flex;flex-direction:column;gap:1.5rem;">
-        <a href="/daily/the-development-process" class="article-item" style="text-decoration:none;color:inherit;display:block;">
-          <div class="article-date">2026-06-29</div>
-          <div class="article-title">The Development Process</div>
-          <div class="article-description">Writing about the development process — how software gets built from idea to production.</div>
-        </a>
-        <a href="/daily/vibe-coder" class="article-item" style="text-decoration:none;color:inherit;display:block;">
-          <div class="article-title">Vibe Coder</div>
-          <div class="article-description">Notes on flow-state building: AI pair programming, tools, and how it feels to ship fast without losing the plot.</div>
-        </a>
-      </div>
-    </div>
-  </div>
-
   <!-- Tab 4: Reading -->
   <div class="tab-pane" id="tab-4">
     <div class="reading-container" style="max-width:900px;margin:0 auto;padding:2rem;">
       <h1 style="text-align:center;margin-bottom:0.5rem;">Reading</h1>
       <p style="text-align:center;color:#666;margin-bottom:2rem;">Deep dives, research notes, and curated reads on life and humanity.</p>
       <div id="reading-list" style="display:flex;flex-direction:column;gap:1.5rem;">
-        <a href="/daily/unit-orchestra-where-the-art-comes-alive" class="article-item" style="text-decoration:none;color:inherit;display:block;">
-          <div class="article-date">2026-09-05</div>
-          <div class="article-title">Unit Orchestra — Where the Art Comes Alive</div>
-          <div class="article-description">Performing on the Mighty Wurlitzer is not the same as prompting an AI to generate music — musicians participate in the sound itself.</div>
-        </a>
-        <a href="/daily/what-has-remained-unchanged-in-contracts" class="article-item" style="text-decoration:none;color:inherit;display:block;">
-          <div class="article-date">2026-09-04</div>
-          <div class="article-title">What Has Remained Unchanged in Contracts After 4,000 Years</div>
-          <div class="article-description">At our core, humans value fairness, trust, and manageable risk.</div>
-        </a>
-        <a href="/daily/cultural-preservation-using-modern-technology" class="article-item" style="text-decoration:none;color:inherit;display:block;">
-          <div class="article-date">2026-07-03</div>
-          <div class="article-title">Cultural Preservation Using Modern Technology</div>
-          <div class="article-description">Exploring how modern technology can be used to preserve and revitalise cultural heritage.</div>
-        </a>
         <a href="/daily/deepseek" class="article-item" style="text-decoration:none;color:inherit;display:block;">
           <div class="article-title">Notes for DeepSeek Paper</div>
           <div class="article-description">DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.</div>
         </a>
-        <a href="/daily/improving-access-essential-medicines" class="article-item" style="text-decoration:none;color:inherit;display:block;">
-          <div class="article-date">2026-05-17</div>
-          <div class="article-title">Improving Access to Essential Medicines via Decision-Aware Machine Learning</div>
-          <div class="article-description">Exploring how decision-aware ML can improve access to essential medicines.</div>
+        <a href="/daily/zero-shot-clinical" class="article-item" style="text-decoration:none;color:inherit;display:block;">
+          <div class="article-date">2026-04-19</div>
+          <div class="article-title">Why 'Zero-Shot' Clinical Predictions Are Risky</div>
+          <div class="article-description">How to interpret 'zero-shot' results from generative EHR models — a new evaluation framework for responsible clinical AI.</div>
         </a>
         <a href="/daily/us-leadership-ai" class="article-item" style="text-decoration:none;color:inherit;display:block;">
           <div class="article-date">2026-04-20</div>
           <div class="article-title">U.S. Leadership in AI with Jensen Huang and Congressman Ro Khanna</div>
           <div class="article-description">Notes from a Stanford talk on the Five Layers of AI, the industrial reset mindset, and how AI should serve multiracial democracy.</div>
         </a>
-        <a href="/daily/zero-shot-clinical" class="article-item" style="text-decoration:none;color:inherit;display:block;">
-          <div class="article-date">2026-04-19</div>
-          <div class="article-title">Why 'Zero-Shot' Clinical Predictions Are Risky</div>
-          <div class="article-description">How to interpret 'zero-shot' results from generative EHR models — a new evaluation framework for responsible clinical AI.</div>
+        <a href="/daily/improving-access-essential-medicines" class="article-item" style="text-decoration:none;color:inherit;display:block;">
+          <div class="article-date">2026-05-17</div>
+          <div class="article-title">Improving Access to Essential Medicines via Decision-Aware Machine Learning</div>
+          <div class="article-description">Exploring how decision-aware ML can improve access to essential medicines.</div>
+        </a>
+        <a href="/daily/cultural-preservation-using-modern-technology" class="article-item" style="text-decoration:none;color:inherit;display:block;">
+          <div class="article-date">2026-07-03</div>
+          <div class="article-title">Cultural Preservation Using Modern Technology</div>
+          <div class="article-description">Exploring how modern technology can be used to preserve and revitalise cultural heritage.</div>
+        </a>
+        <a href="/daily/what-has-remained-unchanged-in-contracts" class="article-item" style="text-decoration:none;color:inherit;display:block;">
+          <div class="article-date">2026-09-04</div>
+          <div class="article-title">What Has Remained Unchanged in Contracts After 4,000 Years</div>
+          <div class="article-description">At our core, humans value fairness, trust, and manageable risk.</div>
+        </a>
+        <a href="/daily/unit-orchestra-where-the-art-comes-alive" class="article-item" style="text-decoration:none;color:inherit;display:block;">
+          <div class="article-date">2026-09-05</div>
+          <div class="article-title">Unit Orchestra — Where the Art Comes Alive</div>
+          <div class="article-description">Performing on the Mighty Wurlitzer is not the same as prompting an AI to generate music — musicians participate in the sound itself.</div>
         </a>
       </div>
     </div>
@@ -661,8 +631,8 @@
 
 
   <script>
-    // Tab index each navbar-tab maps to: Home=-1, ProjectHighlights=1, CaseStudy=2, Collaboration=3, CodingJourney=5, Reading=4
-    const tabMapping = [-1, 1, 2, 3, 5, 4];
+    // Tab index each navbar-tab maps to: Home=-1, ProjectHighlights=1, CaseStudy=2, Collaboration=3, Reading=4
+    const tabMapping = [-1, 1, 2, 3, 4];
 
     function showTab(idx) {
       // Update navbar active class
@@ -692,7 +662,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(window.location.search);
       const tab = parseInt(params.get('tab'));
-      if (!isNaN(tab)) {
+      if (!isNaN(tab) && tab !== 5) {
         showTab(tab);
       } else {
         showTab(-1);
