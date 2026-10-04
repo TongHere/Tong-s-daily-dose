@@ -462,7 +462,7 @@
       <div class="navbar-tab" onclick="showTab(1)">Project Highlights</div>
       <div class="navbar-tab" onclick="showTab(2)">AI Product Case Study</div>
       <div class="navbar-tab" onclick="showTab(3)">Human & Machine Collaboration</div>
-      <div class="navbar-tab" onclick="showTab(4)">Reading</div>
+      <div class="navbar-tab" onclick="showTab(4)">ML Paper</div>
     </div>
   </nav>
 
@@ -486,7 +486,7 @@
       </a>
       <a class="card" href="?tab=4">
         <div class="card-icon">📖</div>
-        <div class="card-title">Reading</div>
+        <div class="card-title">ML Paper</div>
         <div class="card-desc">Deep dives, research notes, and curated reads on life and humanity.</div>
       </a>
     </div>
@@ -585,10 +585,10 @@
     </div>
   </div>
 
-  <!-- Tab 4: Reading -->
+  <!-- Tab 4: ML Paper -->
   <div class="tab-pane" id="tab-4">
     <div class="reading-container" style="max-width:900px;margin:0 auto;padding:2rem;">
-      <h1 style="text-align:center;margin-bottom:0.5rem;">Reading</h1>
+      <h1 style="text-align:center;margin-bottom:0.5rem;">ML Paper</h1>
       <p style="text-align:center;color:#666;margin-bottom:2rem;">Deep dives, research notes, and curated reads on life and humanity.</p>
       <div id="reading-list" style="display:flex;flex-direction:column;gap:1.5rem;">
         <a href="/daily/deepseek" class="article-item" style="text-decoration:none;color:inherit;display:block;">
@@ -615,23 +615,13 @@
           <div class="article-title">Cultural Preservation Using Modern Technology</div>
           <div class="article-description">Exploring how modern technology can be used to preserve and revitalise cultural heritage.</div>
         </a>
-        <a href="/daily/what-has-remained-unchanged-in-contracts" class="article-item" style="text-decoration:none;color:inherit;display:block;">
-          <div class="article-date">2026-09-04</div>
-          <div class="article-title">What Has Remained Unchanged in Contracts After 4,000 Years</div>
-          <div class="article-description">At our core, humans value fairness, trust, and manageable risk.</div>
-        </a>
-        <a href="/daily/unit-orchestra-where-the-art-comes-alive" class="article-item" style="text-decoration:none;color:inherit;display:block;">
-          <div class="article-date">2026-09-05</div>
-          <div class="article-title">Unit Orchestra — Where the Art Comes Alive</div>
-          <div class="article-description">Performing on the Mighty Wurlitzer is not the same as prompting an AI to generate music — musicians participate in the sound itself.</div>
-        </a>
       </div>
     </div>
   </div>
 
 
   <script>
-    // Tab index each navbar-tab maps to: Home=-1, ProjectHighlights=1, CaseStudy=2, Collaboration=3, Reading=4
+    // Tab index each navbar-tab maps to: Home=-1, ProjectHighlights=1, CaseStudy=2, Collaboration=3, MLPaper=4
     const tabMapping = [-1, 1, 2, 3, 4];
 
     function showTab(idx) {
