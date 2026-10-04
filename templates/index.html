@@ -4,42 +4,55 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TongHere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
       background: #fff;
       color: #222;
+      display: flex;
+      min-height: 100vh;
     }
 
     .navbar {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 2rem;
-      height: 64px;
+      flex-direction: column;
+      align-items: stretch;
+      width: 260px;
+      flex-shrink: 0;
+      height: 100vh;
+      padding: 1.75rem 1.15rem;
       background: #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      box-shadow: 1px 0 8px rgba(0, 0, 0, 0.05);
       position: sticky;
       top: 0;
+      box-sizing: border-box;
       z-index: 10;
     }
 
     .navbar-title {
-      font-size: 1.5rem;
+      font-size: 1.35rem;
       font-weight: 700;
+      margin-bottom: 1.75rem;
+      padding: 0 0.6rem;
+      line-height: 1.3;
     }
 
     .navbar-tabs {
       display: flex;
-      gap: 1.5rem;
+      flex-direction: column;
+      gap: 0.3rem;
     }
 
     .navbar-tab {
       cursor: pointer;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 1.1rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      line-height: 1.35;
       transition: all 0.2s;
     }
 
@@ -54,11 +67,16 @@
       color: #1a73e8;
     }
 
+    .page {
+      flex: 1;
+      min-width: 0;
+    }
+
     .tab-pane {
       display: none;
       padding: 2rem;
       box-sizing: border-box;
-      min-height: calc(100vh - 64px);
+      min-height: 100vh;
     }
 
     .tab-pane.active {
@@ -74,7 +92,7 @@
 
     .tab-pane#tab--1.active {
       display: block;
-      padding: 0;
+      overflow-y: auto;
     }
 
     .tab-pane#tab-4.active {
@@ -87,18 +105,33 @@
       overflow-y: auto;
     }
 
-    .card-grid.home-centered {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    gap: 2rem;
-    height: calc(100vh - 64px);
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    box-sizing: border-box;
-    overflow: hidden;
+    .home-socials {
+      display: flex;
+      justify-content: center;
+      gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .home-socials a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #111;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .home-socials a:hover {
+      background: #333;
+    }
+
+    .home-socials svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
 
     .card-grid.centered {
@@ -459,36 +492,30 @@
     <div class="navbar-title">Hi, I'm Tong</div>
     <div class="navbar-tabs">
       <div class="navbar-tab" onclick="showTab(-1)">Home</div>
-      <div class="navbar-tab" onclick="showTab(1)">Project Highlights</div>
+      <div class="navbar-tab" onclick="showTab(1)">AI News</div>
       <div class="navbar-tab" onclick="showTab(2)">AI Product Case Study</div>
       <div class="navbar-tab" onclick="showTab(3)">Human & Machine Collaboration</div>
       <div class="navbar-tab" onclick="showTab(4)">ML Paper</div>
     </div>
   </nav>
 
+  <div class="page">
   <!-- Home -->
   <div class="tab-pane active" id="tab--1">
-    <div class="card-grid home-centered">
-      <a class="card" href="?tab=1">
-        <div class="card-icon">💡</div>
-        <div class="card-title">Project Highlights</div>
-        <div class="card-desc">Explore ongoing and completed projects with code and demos.</div>
-      </a>
-      <a class="card" href="?tab=2">
-        <div class="card-icon">🤖</div>
-        <div class="card-title">AI Product Case Study</div>
-        <div class="card-desc">Dive into real-world AI case studies and product insights.</div>
-      </a>
-      <a class="card" href="?tab=3">
-        <div class="card-icon">🧑‍💻🤝🤖</div>
-        <div class="card-title">Human & Machine Collaboration</div>
-        <div class="card-desc">How humans and AI co-create and solve real problems together.</div>
-      </a>
-      <a class="card" href="?tab=4">
-        <div class="card-icon">📖</div>
-        <div class="card-title">ML Paper</div>
-        <div class="card-desc">Deep dives, research notes, and curated reads on life and humanity.</div>
-      </a>
+    <div class="reading-container" style="max-width:900px;margin:0 auto;padding:2rem;">
+      <h1 style="text-align:center;margin-bottom:0.5rem;">Hi, this is Tong.</h1>
+      <p style="text-align:center;color:#666;margin-bottom:2rem;">I am an AI Product Manager. I blend a research background in humans and machines interaction with hands-on experience building industrial AI products.</p>
+      <div class="home-socials">
+        <a href="https://linkedin.com/in/chen-tong-cyt/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0z"/></svg>
+        </a>
+        <a href="https://github.com/TongHere" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>
+        </a>
+        <a href="mailto:tongchencyt@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -528,7 +555,7 @@
   <!-- Tab 1 -->
   <div class="tab-pane" id="tab-1">
     <div class="news-container">
-      <h1>📰 AI News Aggregator</h1>
+      <h1>AI News</h1>
       <p class="news-subtitle">Latest AI news from trusted sources</p>
       
       <div class="news-categories">
@@ -618,10 +645,11 @@
       </div>
     </div>
   </div>
+  </div>
 
 
   <script>
-    // Tab index each navbar-tab maps to: Home=-1, ProjectHighlights=1, CaseStudy=2, Collaboration=3, MLPaper=4
+    // Tab index each navbar-tab maps to: Home=-1, AINews=1, CaseStudy=2, Collaboration=3, MLPaper=4
     const tabMapping = [-1, 1, 2, 3, 4];
 
     function showTab(idx) {
